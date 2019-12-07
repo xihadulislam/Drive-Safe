@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 dependencies {
@@ -77,6 +81,12 @@ dependencies {
     implementation 'com.github.irfaan008:IRBottomNavigationView:1.0.1'
 
 
+    /// for qrcode scanner
+    implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
+
+
+    //camera permission
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.1'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+
 }
-
-

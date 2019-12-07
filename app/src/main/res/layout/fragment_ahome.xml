@@ -74,11 +74,13 @@
 
 
                         <LinearLayout
+                            android:id="@+id/scannerlinID"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent">
+
 
                             <ImageView
                                 android:src="@drawable/qrcode"
@@ -94,6 +96,9 @@
                                 android:layout_height="wrap_content">
 
                             </TextView>
+
+
+
 
                         </LinearLayout>
 
@@ -121,121 +126,10 @@
 
                             </TextView>
 
-                        </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/createreporterID"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:src="@drawable/policeman"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp">
-
-                            </ImageView>
-
-                            <TextView
-                                android:textAlignment="center"
-                                android:text="Create Reporters"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                            </TextView>
 
                         </LinearLayout>
                         <LinearLayout
-
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:src="@drawable/barchart"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp">
-
-                            </ImageView>
-
-                            <TextView
-                                android:text="Scanner"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                            </TextView>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-
-                    ////////////
-
-
-                    <LinearLayout
-                        android:weightSum="4"
-                        android:orientation="horizontal"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp">
-
-
-                        <LinearLayout
-
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:src="@drawable/driver40"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp">
-
-                            </ImageView>
-
-                            <TextView
-                                android:textAlignment="center"
-                                android:text="All Drivers"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                            </TextView>
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent">
-
-                            <ImageView
-                                android:src="@drawable/mapsandflags"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp">
-
-                            </ImageView>
-
-                            <TextView
-                                android:textAlignment="center"
-                                android:text="Location"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                            </TextView>
-
-                        </LinearLayout>
-                        <LinearLayout
-
+                            android:id="@+id/smsalertlinID"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -258,7 +152,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-
+                            android:id="@+id/allincidentlinId"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -286,6 +180,125 @@
                     </LinearLayout>
 
 
+
+                    ////////////////////////////////////////////////////////////
+                    <LinearLayout
+                        android:weightSum="4"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+
+
+                        <LinearLayout
+                            android:id="@+id/repotrterslinID"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:src="@drawable/policeman"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp">
+
+                            </ImageView>
+
+                            <TextView
+                                android:textAlignment="center"
+                                android:text="Reporters"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/adminlistID"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+
+
+
+                            <ImageView
+                                android:src="@drawable/unauthorized"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp">
+
+                            </ImageView>
+
+                            <TextView
+                                android:textAlignment="center"
+                                android:text="Admin List"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/bestdriverlinID"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+
+
+                            <ImageView
+                                android:src="@drawable/podium"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp">
+
+                            </ImageView>
+
+                            <TextView
+                                android:textAlignment="center"
+                                android:text="Best Drivers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/createadminlinID"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:src="@drawable/barchart"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp">
+
+                            </ImageView>
+
+                            <TextView
+                                android:textAlignment="center"
+                                android:text="Create new Admin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    ////////////
+
+
                     //////////////////////////////////
 
 
@@ -297,8 +310,8 @@
                         android:layout_height="0dp">
 
 
-
                         <LinearLayout
+                            android:id="@+id/alldriverlinID"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -323,14 +336,14 @@
 
 
                         <LinearLayout
+                            android:id="@+id/createreporterlinID"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
                             android:layout_width="0dp"
                             android:layout_height="match_parent">
-
                             <ImageView
-                                android:src="@drawable/podium"
+                                android:src="@drawable/policeman"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp">
 
@@ -338,11 +351,13 @@
 
                             <TextView
                                 android:textAlignment="center"
-                                android:text="Best Drivers"
+                                android:text="Create Reporters"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
 
                             </TextView>
+
+
 
                         </LinearLayout>
                         <LinearLayout
@@ -369,7 +384,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-
+                            android:id="@+id/rejectdriverliID"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -382,7 +397,6 @@
                                 android:layout_height="50dp">
 
                             </ImageView>
-
                             <TextView
                                 android:textAlignment="center"
                                 android:text="Rejected Drivers"
@@ -425,7 +439,6 @@
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent">
-
 
 
                         <ImageView

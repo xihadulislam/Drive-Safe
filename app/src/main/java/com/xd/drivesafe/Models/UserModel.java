@@ -1,6 +1,8 @@
 package com.xd.drivesafe.Models;
 
-public class UserModel {
+import java.io.Serializable;
+
+public class UserModel implements Serializable {
 
     String name,nid,license,address,phone,owner_name,owner_address,owner_phone,number_plate,email,password,image,qrcode,birthdate,gender;
     long create_at,last_open;

@@ -38,7 +38,12 @@ public class FirstActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user!=null){
 
-            if (idnt.equals("user")){
+
+
+            if (idnt==null){
+
+            }
+           else if (idnt.equals("user")){
                 startActivity(new Intent(FirstActivity.this, UserMainActivity.class));
                 finish();
             }
@@ -54,11 +59,10 @@ public class FirstActivity extends AppCompatActivity {
             }
            else
             {
-                Log.d(TAG, "onCreate: ");
+
             }
 
         }
-
 
         findViewById(R.id.buuuuuuuuuuuuuuuuuut).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +73,6 @@ public class FirstActivity extends AppCompatActivity {
 
             }
         });
-
 
     }
 }
