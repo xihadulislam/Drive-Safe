@@ -4,18 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.DriverlistActivity">
+    tools:context=".Admin.ReporterandAdminListActivity">
+
 
 
 
     <ListView
-        android:padding="5dp"
-        android:dividerHeight="0.5dp"
-        android:divider="@color/colorAccent"
-        android:id="@+id/driverslistviewId"
+        android:id="@+id/mainlistId23"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </ListView>
+
+
+
 
 </RelativeLayout>

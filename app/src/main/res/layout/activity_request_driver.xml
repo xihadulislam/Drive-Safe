@@ -9,7 +9,7 @@
 
     <ListView
         android:padding="5dp"
-        android:dividerHeight="1dp"
+        android:dividerHeight="0.5dp"
         android:divider="@color/colorPrimary"
         android:id="@+id/pendingdriverslistviewId"
         android:layout_width="match_parent"

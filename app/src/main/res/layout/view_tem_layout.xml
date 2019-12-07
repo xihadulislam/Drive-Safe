@@ -21,10 +21,10 @@
         android:layout_width="match_parent"
         android:layout_height="70dp">
 
+
         <TextView
             android:textColor="#2C2F31"
             android:lines="1"
-            android:padding="5dp"
             android:gravity="center_vertical"
             android:id="@+id/itemmain_title"
             android:fontFamily="@font/roboto_medium"
@@ -35,7 +35,6 @@
         <TextView
             android:textColor="#2C2F31"
             android:lines="1"
-            android:padding="5dp"
             android:layout_below="@+id/itemmain_title"
             android:id="@+id/itemmain_subtitle"
             android:layout_marginBottom="10dp"

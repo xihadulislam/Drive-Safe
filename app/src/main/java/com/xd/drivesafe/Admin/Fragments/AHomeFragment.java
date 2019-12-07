@@ -23,6 +23,8 @@ import com.blikoon.qrcodescanner.QrCodeActivity;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xd.drivesafe.Admin.CreateAdminActivity;
 import com.xd.drivesafe.Admin.CreateReporterActivity;
+import com.xd.drivesafe.Admin.DriverlistActivity;
+import com.xd.drivesafe.Admin.ReporterandAdminListActivity;
 import com.xd.drivesafe.Admin.RequestDriverActivity;
 import com.xd.drivesafe.R;
 
@@ -102,16 +104,30 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
         } else if (v == layout4) {
 
         } else if (v == layout5) {
+            Intent intent = new Intent(getActivity(), ReporterandAdminListActivity.class);
+            intent.putExtra("key","repo");
+            startActivity(intent);
 
         } else if (v == layout6) {
 
+            Intent intent = new Intent(getActivity(), ReporterandAdminListActivity.class);
+            intent.putExtra("key","admin");
+            startActivity(intent);
+
         } else if (v == layout7) {
+            Intent intent = new Intent(getActivity(), DriverlistActivity.class);
+            intent.putExtra("key","best");
+            startActivity(intent);
 
         } else if (v == layout8) {
             startActivity(new Intent(getActivity(), CreateAdminActivity.class));
 
 
         } else if (v == layout9) {
+
+            Intent intent = new Intent(getActivity(), DriverlistActivity.class);
+            intent.putExtra("key","all");
+            startActivity(intent);
 
         } else if (v == layout10) {
 

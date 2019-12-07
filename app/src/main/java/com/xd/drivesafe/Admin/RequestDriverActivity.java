@@ -44,7 +44,6 @@ public class RequestDriverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_request_driver);
 
 
-
         listView = findViewById(R.id.pendingdriverslistviewId);
         progressDialog = new ProgressDialog(this);
 
@@ -65,7 +64,6 @@ public class RequestDriverActivity extends AppCompatActivity {
 
             PendingDrivers();
         }
-
 
 
     }
@@ -118,10 +116,6 @@ public class RequestDriverActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 
     private void PendingDrivers() {
