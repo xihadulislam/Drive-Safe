@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.xd.drivesafe.Models.ReporterDataModel;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
@@ -59,6 +60,8 @@ public class AdminRepoterAdapter extends BaseAdapter {
         subtitle.setText(listModelList.get(i).getEmail());
    
         imageView.setImageResource(R.drawable.proico);
+
+
 
 
         return view;

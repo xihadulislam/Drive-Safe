@@ -65,6 +65,63 @@ public class DriverlistActivity extends AppCompatActivity {
 
             AllDrivers();
         }
+        else if (val.equals("dng")){
+
+            dangerdrivers();
+
+        }
+
+    }
+
+    private void dangerdrivers() {
+
+        progressDialog.setMessage("please wait...");
+        progressDialog.show();
+        FirebaseFirestore.getInstance().collection("approved_Drivers")
+                .orderBy("point", Query.Direction.DESCENDING)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                list.clear();
+                for (DocumentSnapshot doc : task.getResult()) {
+
+                    UserModel userModel = doc.toObject(UserModel.class);
+
+                    if (userModel.getPoint()<=20){
+                        list.add(userModel);
+                    }
+                    Log.d(TAG, "onComplete: " + userModel.toString());
+
+                }
+                progressDialog.dismiss();
+
+                PendingDriversAdapter adapter = new PendingDriversAdapter(DriverlistActivity.this,list);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        UserModel userModel = list.get(position);
+                        Intent intent = new Intent(DriverlistActivity.this,ApprovepageActivity.class);
+                        intent.putExtra("obj",userModel);
+                        intent.putExtra("check","reject");
+                        startActivity(intent);
+                        Animatoo.animateInAndOut(DriverlistActivity.this);
+
+                    }
+                });
+
+                listView.setAdapter(adapter);
+
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+            }
+        });
+
 
     }
 

@@ -1,9 +1,5 @@
-package com.xd.drivesafe.Reporter;
+package com.xd.drivesafe.Reporter.Fragments;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.Activity;
@@ -12,8 +8,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
@@ -21,86 +23,137 @@ import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener;
 import com.blikoon.qrcodescanner.QrCodeActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.irfaan008.irbottomnavigation.SpaceItem;
-import com.irfaan008.irbottomnavigation.SpaceNavigationView;
-import com.irfaan008.irbottomnavigation.SpaceOnClickListener;
-import com.squareup.picasso.Picasso;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.xd.drivesafe.Admin.ApprovepageActivity;
-import com.xd.drivesafe.Admin.RequestDriverActivity;
-import com.xd.drivesafe.Driver.RegistrationActivity;
+import com.xd.drivesafe.Admin.DriverlistActivity;
+import com.xd.drivesafe.Admin.ReporterandAdminListActivity;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
-import com.xd.drivesafe.Reporter.Fragments.RHomeFragment;
-import com.xd.drivesafe.Reporter.Fragments.RNotificationFragment;
+import com.xd.drivesafe.Reporter.ReportActivity;
+import com.xd.drivesafe.Reporter.ReporterMainActivity;
 
-import static androidx.constraintlayout.widget.Constraints.TAG;
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class RHomeFragment extends Fragment  implements View.OnClickListener {
 
-public class ReporterMainActivity extends AppCompatActivity  {
+
+    public RHomeFragment() {
+        // Required empty public constructor
+    }
+
     private static final int REQUEST_CODE_QR_SCAN = 101;
 
+    LinearLayout layout1,layout2,layout3,layout4,layout5,layout6,layout7,layout8;
+
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reporter_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        View view = inflater.inflate(R.layout.fragment_rhome, container, false);
 
 
-        getSupportActionBar().hide();
-        SpaceNavigationView spaceNavigationView = findViewById(R.id.space);
-        spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
-        spaceNavigationView.addSpaceItem(new SpaceItem("HOME", R.drawable.ic_home));
-        spaceNavigationView.addSpaceItem(new SpaceItem("SEARCH", R.drawable.ic_notifications_black_24dp));
 
-        spaceNavigationView.showIconOnly();
+        layout1 = view.findViewById(R.id.scannerlinID);
+        layout2 = view.findViewById(R.id.linnidverificationId);
+        layout3 = view.findViewById(R.id.smsalertlinID);
+        layout4 = view.findViewById(R.id.allincidentlinId);
+        layout5 = view.findViewById(R.id.repotrterslinID);
+        layout6 = view.findViewById(R.id.adminlistID);
+        layout7 = view.findViewById(R.id.bestdriverlinID);
+        layout8 = view.findViewById(R.id.alldriverlinID);
 
 
-        setFragment(new RHomeFragment());
+
+        layout1.setOnClickListener(this);
+        layout2.setOnClickListener(this);
+        layout3.setOnClickListener(this);
+        layout4.setOnClickListener(this);
+        layout5.setOnClickListener(this);
+        layout6.setOnClickListener(this);
+        layout7.setOnClickListener(this);
+        layout8.setOnClickListener(this);
 
 
-        spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
-            @Override
-            public void onCentreButtonClick() {
-                RxPermissions rxPermissions = new RxPermissions(ReporterMainActivity.this);
-                rxPermissions
-                        .request(Manifest.permission.CAMERA) // ask single or multiple permission once
-                        .subscribe(granted -> {
-                            if (granted) {
-                                Intent i = new Intent(ReporterMainActivity.this, QrCodeActivity.class);
-                                startActivityForResult(i, REQUEST_CODE_QR_SCAN);
-                            } else {
-                                // At least one permission is denied
-                            }
-                        });
 
-            }
+        return view;
 
-            @Override
-            public void onItemClick(int itemIndex, String itemName) {
-                if (itemIndex == 0) {
-                    setFragment(new RHomeFragment());
-                } else if (itemIndex == 1) {
-                    setFragment(new RNotificationFragment());
-                }
-            }
 
-            @Override
-            public void onItemReselected(int itemIndex, String itemName) {
-                //  Toast.makeText(ReporterMainActivity.this, itemIndex + "rrrrrrrrrrrrrrr " + itemName, Toast.LENGTH_SHORT).show();
-            }
-        });
+
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        if (v==layout1){
+
+            RxPermissions rxPermissions = new RxPermissions(getActivity());
+            rxPermissions
+                    .request(Manifest.permission.CAMERA) // ask single or multiple permission once
+                    .subscribe(granted -> {
+                        if (granted) {
+                            Intent i = new Intent(getActivity(), QrCodeActivity.class);
+                            startActivityForResult(i, REQUEST_CODE_QR_SCAN);
+                        } else {
+                            // At least one permission is denied
+                        }
+                    });
+
+
+
+        }
+        else if (v==layout2){
+
+
+        }
+        else if (v==layout3){
+
+
+        }
+        else if (v==layout4){
+
+
+        }
+        else if (v==layout5){
+
+            Intent intent = new Intent(getActivity(), ReporterandAdminListActivity.class);
+            intent.putExtra("key","repo");
+            startActivity(intent);
+
+        } else if (v==layout6){
+            Intent intent = new Intent(getActivity(), DriverlistActivity.class);
+            intent.putExtra("key","dng");
+            startActivity(intent);
+
+
+        } else if (v==layout7){
+
+            Intent intent = new Intent(getActivity(), DriverlistActivity.class);
+            intent.putExtra("key","best");
+            startActivity(intent);
+        }
+        else if (v==layout8){
+
+            Intent intent = new Intent(getActivity(), DriverlistActivity.class);
+            intent.putExtra("key","all");
+            startActivity(intent);
+
+        }
+
+
+
+
 
     }
 
 
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment, fragment.getClass().getSimpleName());
-        fragmentTransaction.commit();
-    }
 
 
     @Override
@@ -114,7 +167,7 @@ public class ReporterMainActivity extends AppCompatActivity  {
             //Getting the passed result
             String result = data.getStringExtra("com.blikoon.qrcodescanner.error_decoding_image");
             if (result != null) {
-                AlertDialog alertDialog = new AlertDialog.Builder(ReporterMainActivity.this).create();
+                AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
                 alertDialog.setTitle("Scan Error");
                 alertDialog.setMessage("QR Code could not be scanned");
                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -135,13 +188,13 @@ public class ReporterMainActivity extends AppCompatActivity  {
             String result = data.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult");
 
 
-            ProgressDialog pd = new ProgressDialog(ReporterMainActivity.this);
+            ProgressDialog pd = new ProgressDialog(getActivity());
             pd.show();
 
 
             if (result.length()!=28 || result.contains("//")){
                 pd.dismiss();
-                Toast.makeText(ReporterMainActivity.this, "Scan invalid QR code", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Scan invalid QR code", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -157,11 +210,11 @@ public class ReporterMainActivity extends AppCompatActivity  {
                         pd.dismiss();
 
                         if (userModel==null){
-                            Toast.makeText(ReporterMainActivity.this, "Scan invalid QR code", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Scan invalid QR code", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
-                        new TTFancyGifDialog.Builder((Activity) ReporterMainActivity.this)
+                        new TTFancyGifDialog.Builder((Activity) getActivity())
                                 .setTitle(userModel.getName())
                                 .setMessage("Number plate: " +userModel.getNumber_plate())
                                 .setPositiveBtnText("Report")
@@ -173,9 +226,9 @@ public class ReporterMainActivity extends AppCompatActivity  {
                                 .OnPositiveClicked(new TTFancyGifDialogListener() {
                                     @Override
                                     public void OnClick() {
-                                        Intent intent = new Intent(ReporterMainActivity.this,ReportActivity.class);
+                                        Intent intent = new Intent(getActivity(), ReportActivity.class);
                                         intent.putExtra("obj",userModel);
-                                        Animatoo.animateSlideLeft(ReporterMainActivity.this);
+                                        Animatoo.animateSlideLeft(getActivity());
                                         startActivity(intent);
                                     }
                                 })
@@ -191,7 +244,7 @@ public class ReporterMainActivity extends AppCompatActivity  {
                     else
                     {
                         pd.dismiss();
-                        Toast.makeText(ReporterMainActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "You are in offline", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -201,6 +254,16 @@ public class ReporterMainActivity extends AppCompatActivity  {
 
         }
     }
+
+
+
+
+
+
+
+
+
+
 
 
 }
