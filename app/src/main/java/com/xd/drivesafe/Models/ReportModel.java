@@ -5,11 +5,12 @@ public class ReportModel {
     String driver_name,phone,userid,description,location,reportername,repoterid,repoid;
     long createat;
     int lostPoint;
+    String driverimage;
 
     public ReportModel() {
     }
 
-    public ReportModel(String driver_name, String phone, String userid, String description, String location, String reportername, String repoterid, String repoid, long createat, int lostPoint) {
+    public ReportModel(String driver_name, String phone, String userid, String description, String location, String reportername, String repoterid, String repoid, long createat, int lostPoint, String driverimage) {
         this.driver_name = driver_name;
         this.phone = phone;
         this.userid = userid;
@@ -20,8 +21,8 @@ public class ReportModel {
         this.repoid = repoid;
         this.createat = createat;
         this.lostPoint = lostPoint;
+        this.driverimage = driverimage;
     }
-
 
     public String getDriver_name() {
         return driver_name;
@@ -101,5 +102,13 @@ public class ReportModel {
 
     public void setLostPoint(int lostPoint) {
         this.lostPoint = lostPoint;
+    }
+
+    public String getDriverimage() {
+        return driverimage;
+    }
+
+    public void setDriverimage(String driverimage) {
+        this.driverimage = driverimage;
     }
 }

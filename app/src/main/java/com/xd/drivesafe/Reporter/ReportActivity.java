@@ -289,7 +289,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
                 ReportModel reportModel = new ReportModel(userModel.getName(), userModel.getPhone(), userModel.getUserId(), des, "null",
 
-                        reporterDataModel.getName(), reporterDataModel.getUserid(), "null", System.currentTimeMillis(), lostpoint);
+                        reporterDataModel.getName(), reporterDataModel.getUserid(), "null", System.currentTimeMillis(), lostpoint,userModel.getImage());
 
                 FirebaseFirestore.getInstance().collection("Report").add(reportModel)
                         .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -299,14 +299,8 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                                 if (task.isSuccessful()) {
 
 
-                                    ReportModel reportModel2 = new ReportModel(userModel.getName(), userModel.getPhone(), userModel.getUserId(), des, "null",
-
-                                            reporterDataModel.getName(), reporterDataModel.getUserid(), task.getResult().getId(), System.currentTimeMillis(), lostpoint);
-
-
                                     FirebaseFirestore.getInstance().collection("Report").document(task.getResult().getId())
                                             .update("repoid", task.getResult().getId());
-
 
                                     for (int i = 0; i < caseModelList.size(); i++) {
                                         CaseModel caseM = caseModelList.get(i);

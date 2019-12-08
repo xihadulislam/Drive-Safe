@@ -31,6 +31,7 @@ import com.xd.drivesafe.Admin.DriverlistActivity;
 import com.xd.drivesafe.Admin.ReporterandAdminListActivity;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
+import com.xd.drivesafe.Reporter.AllincidentlistRActivity;
 import com.xd.drivesafe.Reporter.ReportActivity;
 import com.xd.drivesafe.Reporter.ReporterMainActivity;
 
@@ -115,10 +116,12 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
         }
         else if (v==layout3){
 
-
         }
         else if (v==layout4){
 
+            Intent intent = new Intent(getActivity(), AllincidentlistRActivity.class);
+
+            startActivity(intent);
 
         }
         else if (v==layout5){
