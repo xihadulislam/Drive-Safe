@@ -72,7 +72,6 @@
                                     android:drawablePadding="5dp"
                                     android:fontFamily="@font/roboto_medium"
                                     android:padding="5dp"
-                                    android:text="Xihad"
                                     android:textColor="@color/colorAccent"
                                     android:textSize="20sp" />
 
@@ -83,7 +82,7 @@
                                     android:drawableLeft="@drawable/ic_location_on_black_24dp"
                                     android:drawablePadding="2dp"
                                     android:fontFamily="@font/roboto"
-                                    android:text="sylhet bangladesh"
+
                                     android:textSize="14sp" />
                             </LinearLayout>
 
@@ -157,11 +156,12 @@
                                         android:textSize="20sp" />
 
                                     <TextView
+                                        android:id="@+id/avgrating"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:fontFamily="@font/roboto_medium"
-                                        android:text="4.5"
+
                                         android:textColor="@color/black"
                                         android:textSize="22sp" />
                                 </LinearLayout>
@@ -197,7 +197,6 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="80"
                                             app:backgroundColor="@color/green_bg_light"
                                             app:progressColor="@color/green_active" />
                                         <TextView
@@ -206,7 +205,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:layout_centerVertical="true"
-                                            android:text="555"
+
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>
@@ -237,7 +236,7 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="60"
+
                                             app:backgroundColor="@color/blue_bg_light"
                                             app:progressColor="@color/blue_active" />
 
@@ -247,7 +246,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:layout_centerVertical="true"
-                                            android:text="236"
+
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>
@@ -278,7 +277,7 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="50"
+
                                             app:backgroundColor="@color/orange_bg_light"
                                             app:progressColor="@color/orange_active" />
 
@@ -288,7 +287,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:layout_centerVertical="true"
-                                            android:text="73"
+
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>
@@ -319,7 +318,7 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="20"
+
                                             app:backgroundColor="@color/purple_bg_light"
                                             app:progressColor="@color/purple_active" />
 
@@ -329,7 +328,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:layout_centerVertical="true"
-                                            android:text="54"
+
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>
@@ -360,7 +359,7 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="10"
+
                                             app:backgroundColor="@color/red_bg_light"
                                             app:progressColor="@color/red_active" />
 
@@ -370,7 +369,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:layout_centerVertical="true"
-                                            android:text="5"
+
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>
@@ -399,170 +398,14 @@
                                     android:gravity="center"
                                     android:text="Reviews"
                                     android:textSize="20sp" />
-
-                                <LinearLayout
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/reviewuserRecyID"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <de.hdodenhof.circleimageview.CircleImageView
-                                            android:id="@+id/item_review_icon"
-                                            android:layout_width="50dp"
-                                            android:layout_height="50dp"
-                                            />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginStart="5dp"
-                                            android:layout_marginEnd="50dp"
-                                            android:layout_toEndOf="@+id/item_review_icon"
-                                            android:fontFamily="@font/roboto_medium"
-                                            android:lines="1"
-                                            android:padding="10dp"
-                                            android:text="xihad islam"
-                                            android:textSize="18sp" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignParentEnd="true"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginStart="2dp"
-                                            android:drawableStart="@drawable/ic_star_black_24dp"
-                                            android:text="5.0"
-                                            android:textSize="17sp" />
-
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="10dp"
-                                        android:fontFamily="@font/roboto"
-                                        android:lineSpacingExtra="5dp"
-                                        android:lines="3"
-                                        android:text="@string/lore"
-                                        android:textSize="14sp" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-
-                                    >
-
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-
-                                        <de.hdodenhof.circleimageview.CircleImageView
-                                            android:id="@+id/item_review_icon2"
-                                            android:layout_width="50dp"
-                                            android:layout_height="50dp"
-                                            />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginStart="5dp"
-                                            android:layout_marginEnd="50dp"
-                                            android:layout_toEndOf="@+id/item_review_icon2"
-                                            android:fontFamily="@font/roboto_medium"
-                                            android:lines="1"
-                                            android:padding="10dp"
-                                            android:text="xihad islam"
-                                            android:textSize="18sp" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignParentEnd="true"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginStart="2dp"
-                                            android:drawableLeft="@drawable/ic_star_black_24dp"
-                                            android:text="4.0"
-                                            android:textSize="17sp" />
-
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="10dp"
-                                        android:fontFamily="@font/roboto"
-                                        android:lineSpacingExtra="5dp"
-                                        android:lines="3"
-                                        android:text="@string/lore"
-                                        android:textSize="14sp" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-
-                                    >
+                                    android:layout_height="wrap_content">
 
 
-                                    <RelativeLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
+                                </androidx.recyclerview.widget.RecyclerView>
 
-                                        <de.hdodenhof.circleimageview.CircleImageView
-                                            android:id="@+id/item_review_icon3"
-                                            android:layout_width="50dp"
-                                            android:layout_height="50dp"
-
-                                            />
-
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginLeft="5dp"
-                                            android:layout_marginRight="50dp"
-                                            android:layout_toRightOf="@+id/item_review_icon3"
-                                            android:fontFamily="@font/roboto_medium"
-                                            android:lines="1"
-                                            android:padding="10dp"
-                                            android:text="xihad islam"
-                                            android:textSize="18sp" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignParentRight="true"
-                                            android:layout_centerVertical="true"
-                                            android:layout_marginLeft="2dp"
-                                            android:drawableLeft="@drawable/ic_star_black_24dp"
-                                            android:text="5.0"
-                                            android:textSize="17sp" />
-
-                                    </RelativeLayout>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_margin="10dp"
-                                        android:fontFamily="@font/roboto"
-                                        android:lineSpacingExtra="5dp"
-                                        android:lines="3"
-                                        android:text="@string/lore"
-                                        android:textSize="14sp" />
-
-                                </LinearLayout>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -573,11 +416,6 @@
                                     android:textSize="18sp" />
                             </LinearLayout>
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="1dp"
-                                android:layout_margin="5dp"
-                                android:background="@color/colorPrimary" />
 
 
                             <LinearLayout
@@ -920,6 +758,7 @@
                     android:layout_marginEnd="40dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/propicID"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         app:civ_border_color="@color/white"

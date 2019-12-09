@@ -17,6 +17,7 @@ import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
 import com.xd.drivesafe.User.DriverProfileUserActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDriversAdapter extends RecyclerView.Adapter<UserDriversAdapter.MyViewHolder> {
@@ -64,6 +65,16 @@ public class UserDriversAdapter extends RecyclerView.Adapter<UserDriversAdapter.
     public int getItemCount() {
         return userModelList.size();
     }
+
+
+    public void setfilter(List<UserModel> itemData) {
+        userModelList = new ArrayList<>();
+        userModelList.addAll(itemData);
+        notifyDataSetChanged();
+
+    }
+
+
 
     public  class  MyViewHolder  extends RecyclerView.ViewHolder {
 

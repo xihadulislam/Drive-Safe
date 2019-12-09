@@ -50,7 +50,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Driver.MainDriverActivity" />
+        <activity android:name=".Driver.MainDriverActivity"
+            android:windowSoftInputMode="adjustPan"
+            />
     </application>
 
 </manifest>

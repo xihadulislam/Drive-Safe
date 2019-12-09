@@ -141,6 +141,16 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
         return reportModelList.size();
     }
 
+
+
+    public void setfilter(List<ReportModel> itemData) {
+        reportModelList = new ArrayList<>();
+        reportModelList.addAll(itemData);
+        notifyDataSetChanged();
+
+    }
+
+
     //region ViewHolder class
     class MyViewHolder extends RecyclerView.ViewHolder {
 

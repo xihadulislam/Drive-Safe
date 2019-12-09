@@ -81,7 +81,6 @@ public class UserRegActivity extends AppCompatActivity {
 
                                 String userid = task.getResult().getUser().getUid();
 
-
                                 NormaluserModel normaluserModel = new NormaluserModel(username,email,userid);
 
                                 FirebaseFirestore.getInstance().collection("NormalUserinfo")

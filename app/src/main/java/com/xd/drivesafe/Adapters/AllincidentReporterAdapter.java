@@ -110,6 +110,24 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
         });
 
 
+        FirebaseFirestore.getInstance().collection("Report").document(reportModel.getRepoid())
+                .collection("comments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if (task.isSuccessful()){
+
+
+                    holder.commentText.setText("Comments " +task.getResult().size());
+
+                }
+
+            }
+        });
+
+
+
+
 
     }
 
@@ -117,6 +135,17 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
     public int getItemCount() {
         return reportModelList.size();
     }
+
+
+    public void setfilter(List<ReportModel> itemData) {
+        reportModelList = new ArrayList<>();
+        reportModelList.addAll(itemData);
+        notifyDataSetChanged();
+
+    }
+
+
+
 
     //region ViewHolder class
     class MyViewHolder extends RecyclerView.ViewHolder {
@@ -140,6 +169,12 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
             commentText = itemView.findViewById(R.id.commentsTextID);
             comments  = itemView.findViewById(R.id.commentsitemID);
             relativeLayout = itemView.findViewById(R.id.lin_item);
+
+
+
+
+
+
 
         }
     }

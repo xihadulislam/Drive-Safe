@@ -430,7 +430,6 @@
                                 </androidx.recyclerview.widget.RecyclerView>
 
 
-
                                 <TextView
                                     android:gravity="center_vertical"
                                     android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"

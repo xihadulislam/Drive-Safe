@@ -19,7 +19,7 @@ import com.xd.drivesafe.User.UserMainActivity;
 public class FirstActivity extends AppCompatActivity {
 
     private static final String TAG = "FirstActivity";
-    String  idnt;
+    String idnt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,50 +29,46 @@ public class FirstActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("identy", Context.MODE_PRIVATE);
 
-        if (sharedPreferences.contains("name") ) {
-            idnt = sharedPreferences.getString("name",null);
+        if (sharedPreferences.contains("name")) {
+            idnt = sharedPreferences.getString("name", null);
 
         }
 
+        if (idnt.equals("no")) {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(FirstActivity.this, LoginActivity.class));
+            finish();
+        }
+
+        Log.d(TAG, "onCreate:rrrrrrrrrrrrrrrrr " + idnt);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user!=null){
+        if (user != null) {
 
-
-
-            if (idnt==null){
-
-            }
-           else if (idnt.equals("user")){
+            Log.d(TAG, "onCreate:rrrrrrrrrrrrrrrrr " + idnt);
+            if (idnt == null) {
+                startActivity(new Intent(FirstActivity.this, LoginActivity.class));
+                finish();
+            } else if (idnt.equals("user")) {
                 startActivity(new Intent(FirstActivity.this, UserMainActivity.class));
                 finish();
-            }
-           else if (idnt.equals("admin")){
+            } else if (idnt.equals("admin")) {
                 startActivity(new Intent(FirstActivity.this, AdminMainActivity.class));
                 finish();
-            }else if (idnt.equals("reporter")){
+            } else if (idnt.equals("reporter")) {
                 startActivity(new Intent(FirstActivity.this, ReporterMainActivity.class));
                 finish();
-            }else if (idnt.equals("driver")){
+            } else if (idnt.equals("driver")) {
                 startActivity(new Intent(FirstActivity.this, MainDriverActivity.class));
                 finish();
-            }
-           else
-            {
-
-            }
-
-        }
-
-        findViewById(R.id.buuuuuuuuuuuuuuuuuut).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+            } else if (idnt.equals("no")) {
                 startActivity(new Intent(FirstActivity.this, LoginActivity.class));
                 finish();
 
             }
-        });
+
+        }
 
     }
 }
+
