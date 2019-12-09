@@ -59,6 +59,21 @@ public class UserRegActivity extends AppCompatActivity {
                 String pass = Epass.getText().toString().trim();
 
 
+                if (username.isEmpty()){
+                    Eusername.setError("Username Required");
+                    return;
+                }
+                if (email.isEmpty()){
+                    Eemail.setError("Email Required");
+                    return;
+                }
+
+                if (pass.isEmpty()){
+
+                    Epass.setError("Password required");
+                    return;
+                }
+
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,pass)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override

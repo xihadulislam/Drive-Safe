@@ -9,21 +9,27 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.blikoon.qrcodescanner.QrCodeActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.irfaan008.irbottomnavigation.SpaceItem;
 import com.irfaan008.irbottomnavigation.SpaceNavigationView;
 import com.irfaan008.irbottomnavigation.SpaceOnClickListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.xd.drivesafe.FirstActivity;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
 import com.xd.drivesafe.User.Fragments.UDriverListFragment;
@@ -46,6 +52,15 @@ public class UserMainActivity extends AppCompatActivity {
         spaceNavigationView.addSpaceItem(new SpaceItem("Drivers", R.drawable.ic_person_black_24dp));
 
       //  spaceNavigationView.showIconOnly();
+
+
+
+        if (FirebaseAuth.getInstance().getCurrentUser()==null){
+            startActivity(new Intent(UserMainActivity.this, FirstActivity.class));
+            finish();
+
+        }
+
 
 
         setFragment(new UHomeFragment());
@@ -170,14 +185,42 @@ public class UserMainActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-
         }
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.profilemenu:
+              startActivity(new Intent(UserMainActivity.this,UserProfileActivity.class));
+                return true;
+            case R.id.signout:
+                storedata("no");
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(UserMainActivity.this, FirstActivity.class));
+                finish();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void storedata(String name) {
+        SharedPreferences sharedPreferences = getSharedPreferences("identy", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", name);
+        editor.commit();
+    }
 
 }
