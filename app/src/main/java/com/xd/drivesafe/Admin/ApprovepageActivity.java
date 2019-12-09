@@ -279,7 +279,7 @@ public class ApprovepageActivity extends AppCompatActivity {
                                 userModel.getOwner_name(),  userModel.getOwner_address(),  userModel.getOwner_phone(),
                                 userModel.getNumber_plate(),  userModel.getEmail(),  userModel.getPassword(),
                                 userModel.getImage(), uri.toString(),  userModel.getBirthdate(),
-                                userModel.getGender() , userModel.getCreate_at(),  userModel.getLast_open(),  userModel.getPoint(), userModel.getUserId());
+                                userModel.getGender() , userModel.getCreate_at(),  userModel.getLast_open(),  userModel.getPoint(), userModel.getUserId(), (float) 0.0);
 
                         FirebaseFirestore.getInstance().collection("approved_Drivers").document(userModel.getUserId()).set(usermodel2)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -294,7 +294,6 @@ public class ApprovepageActivity extends AppCompatActivity {
                                                 startActivity(new Intent(ApprovepageActivity.this, RequestDriverActivity.class));
                                                 finish();
                                                 Animatoo.animateSlideLeft(ApprovepageActivity.this);
-
                                             }
                                         });
 

@@ -248,7 +248,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                                     UserModel userModel = new UserModel(name, nid, license, address, phone, ownername, owneradress, ownerphone,
                                             numberplate, email, password, ImageUri, null, birthdate,
-                                            "male", System.currentTimeMillis(), System.currentTimeMillis(), 500, userid);
+                                            "male", System.currentTimeMillis(), System.currentTimeMillis(), 500, userid, (float) 0.0);
                                     FirebaseFirestore.getInstance().collection("temp_userInfo").document(userid).set(userModel)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override

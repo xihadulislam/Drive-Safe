@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,17 +23,15 @@ import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Models.CaseModel;
 import com.xd.drivesafe.Models.ReportModel;
 import com.xd.drivesafe.R;
+import com.xd.drivesafe.User.CommentActivity;
+import com.xd.drivesafe.User.DriverProfileUserActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static java.util.Objects.requireNonNull;
-
-public class AllincidentReporterAdapter extends  RecyclerView.Adapter<AllincidentReporterAdapter.MyViewHolder> {
-
+public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUserAdapter.MyViewHolder> {
 
 
     private Context context;
@@ -42,7 +39,7 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
 
     List<CaseModel>caseModelList ;
 
-    public AllincidentReporterAdapter(Context context, List<ReportModel> reportModelList) {
+    public AllincidentUserAdapter(Context context, List<ReportModel> reportModelList) {
         this.context = context;
         this.reportModelList = reportModelList;
     }
@@ -60,7 +57,6 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
         final ReportModel reportModel = reportModelList.get(position);
 
         Picasso.get().load(reportModel.getDriverimage()).into(holder.propic);
-
 
 
         holder.drivername.setText(reportModel.getDriver_name());
@@ -97,18 +93,45 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
                     }
                 });
 
-        
+
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, DriverprofileDActivity.class);
+                Intent intent = new Intent(context, DriverProfileUserActivity.class);
                 intent.putExtra("key",reportModel.getUserid());
                 context.startActivity(intent);
 
             }
         });
 
+
+        holder.comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra("id", reportModel.getRepoid());
+                context.startActivity(intent);
+
+            }
+        });
+
+
+        FirebaseFirestore.getInstance().collection("Report").document(reportModel.getRepoid())
+                .collection("comments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if (task.isSuccessful()){
+
+
+                    holder.commentText.setText("Comments " +task.getResult().size());
+
+                }
+
+            }
+        });
 
 
     }

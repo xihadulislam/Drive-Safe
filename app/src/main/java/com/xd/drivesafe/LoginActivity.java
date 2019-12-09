@@ -26,6 +26,7 @@ import com.xd.drivesafe.Driver.MainDriverActivity;
 import com.xd.drivesafe.Driver.RegistrationActivity;
 import com.xd.drivesafe.Reporter.ReporterMainActivity;
 import com.xd.drivesafe.User.UserMainActivity;
+import com.xd.drivesafe.User.UserRegActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -59,7 +60,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        
+
+        findViewById(R.id.texttttt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(LoginActivity.this, UserRegActivity.class));
+
+            }
+        });
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

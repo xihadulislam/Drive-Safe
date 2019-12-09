@@ -1,4 +1,4 @@
-package com.xd.drivesafe.Admin;
+package com.xd.drivesafe.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +17,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.xd.drivesafe.Admin.AdminMainActivity;
+import com.xd.drivesafe.Admin.CreateReporterActivity;
+import com.xd.drivesafe.LoginActivity;
 import com.xd.drivesafe.Models.Identity;
+import com.xd.drivesafe.Models.NormaluserModel;
 import com.xd.drivesafe.Models.ReporterDataModel;
 import com.xd.drivesafe.R;
 
-public class CreateAdminActivity extends AppCompatActivity {
-
+public class UserRegActivity extends AppCompatActivity {
 
     private MaterialEditText Eusername,Eemail,Epass;
 
@@ -30,22 +33,20 @@ public class CreateAdminActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_admin);
+        setContentView(R.layout.activity_user_reg);
 
 
         getSupportActionBar().hide();
-
-        Eusername = findViewById(R.id.createusernameadminID);
-        Eemail = findViewById(R.id.createemailadminID);
-        Epass = findViewById(R.id.createpassadminID);
+        Eusername = findViewById(R.id.createusernamerepoID);
+        Eemail = findViewById(R.id.createemailrepoID);
+        Epass = findViewById(R.id.createpassrepoID);
 
         progressDialog = new ProgressDialog(this);
 
-        button = findViewById(R.id.createbuttonadminID);
+        button = findViewById(R.id.createbuttonrepoID);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,18 +66,19 @@ public class CreateAdminActivity extends AppCompatActivity {
 
                                 String userid = task.getResult().getUser().getUid();
 
-                                ReporterDataModel reporterDataModel = new ReporterDataModel(username,email,userid);
 
-                                FirebaseFirestore.getInstance().collection("admininfo")
-                                        .document(userid).set(reporterDataModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                NormaluserModel normaluserModel = new NormaluserModel(username,email,userid);
+
+                                FirebaseFirestore.getInstance().collection("NormalUserinfo")
+                                        .document(userid).set(normaluserModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         progressDialog.dismiss();
-                                        Identity identity = new Identity("admin");
+                                        Identity identity = new Identity("user");
 
                                         FirebaseFirestore.getInstance().collection("idnty").document(userid).set(identity);
 
-                                        startActivity(new Intent(CreateAdminActivity.this,AdminMainActivity.class));
+                                        startActivity(new Intent(UserRegActivity.this, LoginActivity.class));
                                         finish();
 
                                     }
@@ -87,7 +89,7 @@ public class CreateAdminActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Toast.makeText(CreateAdminActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserRegActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -98,5 +100,11 @@ public class CreateAdminActivity extends AppCompatActivity {
 
 
 
+
+
+
+
     }
 }
+
+

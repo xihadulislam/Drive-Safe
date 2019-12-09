@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Driver.DriverprofileDActivity">
-
+    tools:context=".User.DriverProfileUserActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -90,7 +89,7 @@
                                     android:id="@+id/licensenumberID"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:drawablePadding="2dp"
+                                   android:drawablePadding="2dp"
                                     android:fontFamily="@font/roboto"
                                     android:text="sylhet bangladesh"
                                     android:textSize="14sp" />
@@ -445,7 +444,46 @@
                                     android:textSize="20dp" />
                             </LinearLayout>
 
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <RatingBar
+                                    android:rating="3"
+                                    android:id="@+id/userratingbarid"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_gravity="center"
+                                    android:numStars="5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+                                </RatingBar>
 
+                                <EditText
+                                    android:padding="8dp"
+                                    android:hint="Write some good reviews !"
+                                    android:id="@+id/writereview"
+                                    android:gravity="start"
+                                    android:layout_margin="8dp"
+                                    android:background="@drawable/bag"
+                                    android:layout_below="@+id/userratingbarid"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp">
+
+                                </EditText>
+
+                                <Button
+                                    android:id="@+id/subminreview"
+                                    android:layout_margin="5dp"
+                                    android:textColor="@color/white"
+                                    android:text="Submit"
+                                    android:background="@drawable/bag_right"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_below="@+id/writereview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                </Button>
+
+                            </RelativeLayout>
 
                             <LinearLayout
                                 android:padding="8dp"
@@ -518,5 +556,5 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
 
+</RelativeLayout>

@@ -8,11 +8,14 @@ public class UserModel implements Serializable {
     long create_at,last_open;
     int point;
     String userId;
+    float avgrating;
+
 
     public UserModel() {
     }
 
-    public UserModel(String name, String nid, String license, String address, String phone, String owner_name, String owner_address, String owner_phone, String number_plate, String email, String password, String image, String qrcode, String birthdate, String gender, long create_at, long last_open, int point, String userId) {
+
+    public UserModel(String name, String nid, String license, String address, String phone, String owner_name, String owner_address, String owner_phone, String number_plate, String email, String password, String image, String qrcode, String birthdate, String gender, long create_at, long last_open, int point, String userId, float avgrating) {
         this.name = name;
         this.nid = nid;
         this.license = license;
@@ -32,6 +35,7 @@ public class UserModel implements Serializable {
         this.last_open = last_open;
         this.point = point;
         this.userId = userId;
+        this.avgrating = avgrating;
     }
 
     public String getName() {
@@ -184,6 +188,14 @@ public class UserModel implements Serializable {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public float getAvgrating() {
+        return avgrating;
+    }
+
+    public void setAvgrating(float avgrating) {
+        this.avgrating = avgrating;
     }
 }
 

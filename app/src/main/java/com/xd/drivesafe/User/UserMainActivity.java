@@ -14,8 +14,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
-import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener;
 import com.blikoon.qrcodescanner.QrCodeActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,12 +26,8 @@ import com.irfaan008.irbottomnavigation.SpaceOnClickListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
-import com.xd.drivesafe.Reporter.Fragments.RHomeFragment;
-import com.xd.drivesafe.Reporter.Fragments.RNotificationFragment;
-import com.xd.drivesafe.Reporter.ReportActivity;
-import com.xd.drivesafe.Reporter.ReporterMainActivity;
+import com.xd.drivesafe.User.Fragments.UDriverListFragment;
 import com.xd.drivesafe.User.Fragments.UHomeFragment;
-import com.xd.drivesafe.User.Fragments.UNotificationFragment;
 
 public class UserMainActivity extends AppCompatActivity {
 
@@ -45,17 +39,16 @@ public class UserMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_main);
 
 
-        getSupportActionBar().hide();
+
         SpaceNavigationView spaceNavigationView = findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
-        spaceNavigationView.addSpaceItem(new SpaceItem("HOME", R.drawable.ic_home));
-        spaceNavigationView.addSpaceItem(new SpaceItem("SEARCH", R.drawable.ic_notifications_black_24dp));
+        spaceNavigationView.addSpaceItem(new SpaceItem("Incidents", R.drawable.ic_home));
+        spaceNavigationView.addSpaceItem(new SpaceItem("Drivers", R.drawable.ic_person_black_24dp));
 
-        spaceNavigationView.showIconOnly();
+      //  spaceNavigationView.showIconOnly();
 
 
         setFragment(new UHomeFragment());
-
 
         spaceNavigationView.setSpaceOnClickListener(new SpaceOnClickListener() {
             @Override
@@ -79,7 +72,7 @@ public class UserMainActivity extends AppCompatActivity {
                 if (itemIndex == 0) {
                     setFragment(new UHomeFragment());
                 } else if (itemIndex == 1) {
-                    setFragment(new UNotificationFragment());
+                    setFragment(new UDriverListFragment());
                 }
             }
             @Override
@@ -139,6 +132,46 @@ public class UserMainActivity extends AppCompatActivity {
                 Toast.makeText(UserMainActivity.this, "Scan invalid QR code", Toast.LENGTH_SHORT).show();
                 return;
             }
+
+
+            FirebaseFirestore.getInstance().collection("approved_Drivers")
+                    .document(result).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+
+                    if (task.isSuccessful()){
+                        DocumentSnapshot doc = task.getResult();
+                        UserModel userModel = doc.toObject(UserModel.class);
+                        pd.dismiss();
+
+                        if (userModel==null){
+                            Toast.makeText(UserMainActivity.this, "Scan invalid QR code", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+
+                        Intent intent = new Intent(UserMainActivity.this, DriverProfileUserActivity.class);
+                        intent.putExtra("key",userModel.getUserId());
+                        Animatoo.animateSlideLeft(UserMainActivity.this);
+                        startActivity(intent);
+
+                    }
+                    else
+                    {
+                        pd.dismiss();
+                        Toast.makeText(UserMainActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+            });
+
+
+
+
+
+
 
 
 

@@ -1,4 +1,4 @@
-package com.xd.drivesafe.Driver;
+package com.xd.drivesafe.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,24 +30,27 @@ import com.squareup.picasso.Picasso;
 import com.xd.drivesafe.Adapters.AllincidentReporterAdapter;
 import com.xd.drivesafe.Adapters.AllincidentUserAdapter;
 import com.xd.drivesafe.Adapters.ReviewAdapter;
+import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Models.NormaluserModel;
 import com.xd.drivesafe.Models.ReportModel;
 import com.xd.drivesafe.Models.ReviewModel;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
-import com.xd.drivesafe.Reporter.AllincidentlistRActivity;
-import com.xd.drivesafe.User.DriverProfileUserActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DriverprofileDActivity extends AppCompatActivity {
+public class DriverProfileUserActivity extends AppCompatActivity {
 
+    private static final String TAG = "DriverProfileUserActivi";
 
     RecyclerView recyclerView;
 
+    RatingBar ratingBar;
+    EditText Ereview;
+    Button reviewsubmit;
 
     UserModel userModel;
     NormaluserModel normaluserModel;
@@ -77,24 +81,29 @@ public class DriverprofileDActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_driverprofile_d);
+        setContentView(R.layout.activity_driver_profile_user);
 
 
         Intent intent = getIntent();
-        val = intent.getStringExtra("key");
+         val = intent.getStringExtra("key");
 
 
-        coverpic = findViewById(R.id.coverpicId);
-        propic = findViewById(R.id.propicID);
-        name = findViewById(R.id.pronameID);
-        address = findViewById(R.id.proaddressId);
-        point = findViewById(R.id.propointId);
-        avgrating = findViewById(R.id.avgrating);
-        license = findViewById(R.id.licensenumberID);
-        phone = findViewById(R.id.phonenumber);
+         coverpic = findViewById(R.id.coverpicId);
+         propic = findViewById(R.id.propicID);
+         name = findViewById(R.id.pronameID);
+         address = findViewById(R.id.proaddressId);
+         point = findViewById(R.id.propointId);
+         avgrating = findViewById(R.id.avgrating);
+         license = findViewById(R.id.licensenumberID);
+         phone = findViewById(R.id.phonenumber);
 
         recyclerView  = findViewById(R.id.reviewuserRecyID);
         recyclerView2  = findViewById(R.id.OwnRecyID);
+
+
+        ratingBar = findViewById(R.id.userratingbarid);
+        Ereview = findViewById(R.id.writereview);
+        reviewsubmit= findViewById(R.id.subminreview);
 
 
         cnt1 = findViewById(R.id.countpro);
@@ -123,7 +132,7 @@ public class DriverprofileDActivity extends AppCompatActivity {
 
                 DocumentSnapshot doc = task.getResult();
 
-                normaluserModel = doc.toObject(NormaluserModel.class);
+                 normaluserModel = doc.toObject(NormaluserModel.class);
 
 
             }
@@ -138,6 +147,7 @@ public class DriverprofileDActivity extends AppCompatActivity {
 
                 DocumentSnapshot doc = task.getResult();
                 userModel = doc.toObject(UserModel.class);
+
 
 
                 FirebaseFirestore.getInstance().collection("approved_Drivers").document(val)
@@ -168,7 +178,7 @@ public class DriverprofileDActivity extends AppCompatActivity {
                                     cn5=cn5+1;
                                 }else  if (reviewModel.getRating()==4){
 
-                                    cn4 = cn4+1;
+                                   cn4 = cn4+1;
                                 } else  if (reviewModel.getRating()==3){
 
                                     cn3 = cn3 +1;
@@ -181,6 +191,7 @@ public class DriverprofileDActivity extends AppCompatActivity {
                                     cn1 = cn1 +1;
 
                                 }
+
                             }
                             cnt5.setText(cn1+"");
                             cnt4.setText(cn2+"");
@@ -202,8 +213,53 @@ public class DriverprofileDActivity extends AppCompatActivity {
         });
 
 
-    }
 
+        reviewsubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ProgressDialog pd = new ProgressDialog(DriverProfileUserActivity.this);
+
+                pd.show();
+
+                String review = Ereview.getText().toString().trim();
+                float rating = ratingBar.getRating();
+
+                ReviewModel reviewModel = new ReviewModel(normaluserModel.getUsername(),normaluserModel.getUserid(),review,userModel.getUserId(),
+                        rating,System.currentTimeMillis());
+
+                FirebaseFirestore.getInstance().collection("approved_Drivers").document(val)
+                        .collection("Reviews").add(reviewModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if (task.isSuccessful()){
+
+
+                            float bal = userModel.getAvgrating()+rating;
+
+                            FirebaseFirestore.getInstance().collection("approved_Drivers").document(val)
+                                    .update("avgrating",bal);
+
+
+                            pd.dismiss();
+                            Toast.makeText(DriverProfileUserActivity.this, "Submitted", Toast.LENGTH_SHORT).show();
+                         Intent intent1 =  new  Intent(DriverProfileUserActivity.this,DriverProfileUserActivity.class);
+                         intent.putExtra("key",userModel.getUserId());
+                            startActivity(intent);
+                            finish();
+                        }
+                        else
+                        {
+                            pd.dismiss();
+                        }
+                    }
+                });
+
+            }
+        });
+
+
+    }
 
     private void setRecyview2() {
 
@@ -223,8 +279,8 @@ public class DriverprofileDActivity extends AppCompatActivity {
 
                     }
 
-                    AllincidentReporterAdapter adapter = new AllincidentReporterAdapter(DriverprofileDActivity.this,reportModelList);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DriverprofileDActivity.this);
+                    AllincidentUserAdapter adapter = new AllincidentUserAdapter(DriverProfileUserActivity.this,reportModelList);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(DriverProfileUserActivity.this);
                     recyclerView2.setLayoutManager(linearLayoutManager);
                     recyclerView2.setHasFixedSize(true);
                     recyclerView2.setAdapter(adapter);
@@ -255,9 +311,9 @@ public class DriverprofileDActivity extends AppCompatActivity {
 
                     }
 
-                    ReviewAdapter adapter = new ReviewAdapter(DriverprofileDActivity.this,reviewModelList);
+                    ReviewAdapter adapter = new ReviewAdapter(DriverProfileUserActivity.this,reviewModelList);
                     recyclerView.setHasFixedSize(true);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(DriverprofileDActivity.this));
+                    recyclerView.setLayoutManager(new LinearLayoutManager(DriverProfileUserActivity.this));
                     recyclerView.setAdapter(adapter);
 
 
@@ -268,6 +324,4 @@ public class DriverprofileDActivity extends AppCompatActivity {
 
 
     }
-
-
 }

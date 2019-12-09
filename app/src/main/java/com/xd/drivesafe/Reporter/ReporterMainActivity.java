@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xd.drivesafe.Admin.ApprovepageActivity;
 import com.xd.drivesafe.Admin.RequestDriverActivity;
+import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Driver.RegistrationActivity;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
@@ -182,6 +183,11 @@ public class ReporterMainActivity extends AppCompatActivity  {
                                 .OnNegativeClicked(new TTFancyGifDialogListener() {
                                     @Override
                                     public void OnClick() {
+
+                                        Intent intent = new Intent(ReporterMainActivity.this, DriverprofileDActivity.class);
+                                        intent.putExtra("key",userModel.getUserId());
+                                        Animatoo.animateSlideLeft(ReporterMainActivity.this);
+                                        startActivity(intent);
 
                                     }
                                 })

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-    android:layout_margin="5dp"
     app:cardElevation="10dp"
     app:contentPadding="2dp"
-    app:cardCornerRadius="8dp"
+    android:layout_margin="2dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"

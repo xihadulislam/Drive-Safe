@@ -4,8 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:padding="5dp"
+    android:background="@color/white"
+    android:layout_margin="2dp"
     >
-
 
     <de.hdodenhof.circleimageview.CircleImageView
 
