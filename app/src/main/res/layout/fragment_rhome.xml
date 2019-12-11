@@ -326,19 +326,20 @@
 
 
                     <LinearLayout
+                        android:id="@+id/signoutrepoID"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="match_parent">
                         <ImageView
-                            android:src="@drawable/review"
+                            android:src="@drawable/ic_clear_all_black_24dp"
                             android:layout_width="50dp"
                             android:layout_height="50dp">
                         </ImageView>
                         <TextView
                             android:textAlignment="center"
-                            android:text="User Reviews"
+                            android:text="Sign Out"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -347,7 +348,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-
+                        android:id="@+id/traficruleID"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_weight="1"
@@ -392,7 +393,7 @@
 
                     </LinearLayout>
                     <LinearLayout
-
+                        android:id="@+id/profileid"
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_weight="1"
@@ -424,8 +425,6 @@
 
         </RelativeLayout>
     </ScrollView>
-
-
 
 
 </RelativeLayout>

@@ -4,11 +4,13 @@ package com.xd.drivesafe.Admin.Fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -18,15 +20,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.blikoon.qrcodescanner.QrCodeActivity;
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xd.drivesafe.Admin.CreateAdminActivity;
 import com.xd.drivesafe.Admin.CreateReporterActivity;
 import com.xd.drivesafe.Admin.DriverlistActivity;
 import com.xd.drivesafe.Admin.ReporterandAdminListActivity;
 import com.xd.drivesafe.Admin.RequestDriverActivity;
+import com.xd.drivesafe.Driver.DriverprofileDActivity;
+import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
+import com.xd.drivesafe.Reporter.AllincidentlistRActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -103,6 +114,12 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
 
         } else if (v == layout4) {
 
+
+            Intent intent = new Intent(getActivity(), AllincidentlistRActivity.class);
+            intent.putExtra("key","all");
+            startActivity(intent);
+
+
         } else if (v == layout5) {
             Intent intent = new Intent(getActivity(), ReporterandAdminListActivity.class);
             intent.putExtra("key","repo");
@@ -149,12 +166,13 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
     }
 
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) {
-            Log.d(LOGTAG, "COULD NOT GET A GOOD RESULT.");
+
             if (data == null)
                 return;
             //Getting the passed result
@@ -179,20 +197,49 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
                 return;
             //Getting the passed result
             String result = data.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult");
-            Log.d(LOGTAG, "Have scan result in your app activity :" + result);
-            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
-            alertDialog.setTitle("Scan result");
-            alertDialog.setMessage(result);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
 
-                            //  startActivity(new Intent(getActivity(), ReportPageActivity.class));
 
-                            dialog.dismiss();
+            ProgressDialog pd = new ProgressDialog(getActivity());
+            pd.show();
+
+
+            if (result.length() != 28 || result.contains("//")) {
+                pd.dismiss();
+                Toast.makeText(getActivity(), "Scan invalid QR code", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+            FirebaseFirestore.getInstance().collection("approved_Drivers")
+                    .document(result).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot doc = task.getResult();
+                        UserModel userModel = doc.toObject(UserModel.class);
+                        pd.dismiss();
+
+                        if (userModel == null) {
+                            Toast.makeText(getActivity(), "Scan invalid QR code", Toast.LENGTH_SHORT).show();
+                            return;
                         }
-                    });
-            alertDialog.show();
+
+                        Intent intent = new Intent(getActivity(), DriverprofileDActivity.class);
+                        intent.putExtra("key", userModel.getUserId());
+                        Animatoo.animateSlideLeft(getActivity());
+                        startActivity(intent);
+
+                    } else {
+                        pd.dismiss();
+                        Toast.makeText(getActivity(), "You are in offline", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+            });
+
 
         }
     }

@@ -105,26 +105,29 @@ public class LoginActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
                                                 String name = task.getResult().get("name").toString();
-                                                storedata(name);
+
                                                 if (name.equals("user")){
                                                     progressDialog.dismiss();
+                                                    storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, UserMainActivity.class));
                                                     finish();
                                                 }
                                                 if (name.equals("admin")){
                                                     progressDialog.dismiss();
+                                                    storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
                                                     finish();
                                                 } if (name.equals("reporter")){
                                                     progressDialog.dismiss();
+                                                    storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, ReporterMainActivity.class));
                                                     finish();
                                                 } if (name.equals("driver")){
                                                     progressDialog.dismiss();
+                                                    storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, MainDriverActivity.class));
                                                     finish();
                                                 }
-
                                             }
                                         });
 

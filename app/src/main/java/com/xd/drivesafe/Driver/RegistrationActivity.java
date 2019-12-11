@@ -14,6 +14,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.service.autofill.RegexValidator;
+import android.telephony.PhoneNumberUtils;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -41,6 +45,10 @@ import com.xd.drivesafe.LoginActivity;
 import com.xd.drivesafe.Models.Identity;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
+
+import org.w3c.dom.Text;
+
+import javax.annotation.RegEx;
 
 public class RegistrationActivity extends AppCompatActivity {
 
@@ -95,7 +103,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-
         storageReference = FirebaseStorage.getInstance().getReference("userinfo");
 
         Bselestimage.setOnClickListener(new View.OnClickListener() {
@@ -118,13 +125,11 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
 
+
         Bregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
-                progressDialog.setMessage("Please Wait...!");
-                progressDialog.show();
 
                 name = Ename.getText().toString().trim();
                 nid = Enid.getText().toString().trim();
@@ -139,9 +144,119 @@ public class RegistrationActivity extends AppCompatActivity {
                 password = Epassword.getText().toString().trim();
                 birthdate = Ebirthdate.getText().toString().trim();
 
-                if (name.isEmpty()) {
-                    Ename.setError("Name required");
+                if (birthdate.isEmpty()){
+                    Ebirthdate.setError("Birthrate is required");
+                    return;
                 }
+
+                if (password.isEmpty()){
+
+                    Epassword.setError("Password is Required");
+                    return;
+
+                }
+                if (email.isEmpty()){
+
+                    Eemail.setError("Email is Required");
+                    return;
+                }
+
+                if (numberplate.length()<6){
+                    Enumberplate.setError("Number plate is required");
+                    return;
+                }
+
+                if (owneradress.isEmpty()){
+
+                    Eowneradress.setError("Owner Address is Required");
+                    return;
+                }
+                if (ownername.isEmpty()){
+                    Eownername.setError("Owner Name is Required");
+                    return;
+                }
+
+                if (name.isEmpty()) {
+                    Ename.setError("Name is required");
+                    return;
+                }
+
+                if ( nid.isEmpty() || nid.length()<10){
+                    Enid.setError("Valid NID is Required");
+                    return;
+                }
+
+                if (license.length() != 15){
+                    Elicense.setError("Valid License is Required");
+                    return;
+                }
+                if (address.isEmpty()){
+
+                    Eaddress.setError("Address is required");
+                    return;
+                }
+
+                if (phone.length()!=11){
+
+                    Ephone.setError("Enter Valid Phone Number");
+                    return;
+                }
+                else {
+
+                    if ( phone.startsWith("017")){
+                    }else if (phone.startsWith("018")){
+
+                    }else if (phone.startsWith("016")){
+
+                    }else if (phone.startsWith("019")){
+
+                    }else if (phone.startsWith("013")){
+
+                    }else if (phone.startsWith("015")){
+
+                    } else  if (phone.startsWith("014")){
+
+                    }
+                    else {
+                        Ephone.setError("Enter Valid Phone Number");
+                        return;
+                    }
+
+                }
+
+
+                if (ownerphone.length()!=11  ){
+
+                    Eownerphone.setError("Enter Valid Phone Number");
+                    return;
+                }
+                else {
+
+                    if ( ownerphone.startsWith("017")){
+                    }else if (ownerphone.startsWith("018")){
+
+
+                    }else if (ownerphone.startsWith("016")){
+
+                    }else if (ownerphone.startsWith("019")){
+
+                    }else if (ownerphone.startsWith("013")){
+
+                    }else if (ownerphone.startsWith("015")){
+
+                    } else  if (ownerphone.startsWith("014")){
+
+                    }
+                    else {
+                        Eownerphone.setError("Enter Valid Phone Number");
+                        return;
+                    }
+
+                }
+
+
+                progressDialog.setMessage("Please Wait...!");
+                progressDialog.show();
 
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

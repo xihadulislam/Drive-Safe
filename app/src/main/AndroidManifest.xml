@@ -17,10 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".User.UserProfileActivity"
-            android:theme="@style/AppTheme.popUpWindow"
-            />
+        <activity android:name=".Driver.IncidentRulesActivity"></activity>
+        <activity
+            android:name=".Driver.PersonalinformationActivity"
+            android:theme="@style/AppTheme.popUpWindow" />
+        <activity
+            android:name=".User.UserProfileActivity"
+            android:theme="@style/AppTheme.popUpWindow" />
         <activity android:name=".User.UserRegActivity" />
         <activity android:name=".User.DriverProfileUserActivity" />
         <activity android:name=".User.CommentActivity" />
@@ -50,9 +53,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".Driver.MainDriverActivity"
-            android:windowSoftInputMode="adjustPan"
-            />
+        <activity
+            android:name=".Driver.MainDriverActivity"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

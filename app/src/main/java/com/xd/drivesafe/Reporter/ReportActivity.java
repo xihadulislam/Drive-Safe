@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 import com.xd.drivesafe.Driver.MainDriverActivity;
 import com.xd.drivesafe.Models.CaseModel;
+import com.xd.drivesafe.Models.NotificationModel;
 import com.xd.drivesafe.Models.ReportModel;
 import com.xd.drivesafe.Models.ReporterDataModel;
 import com.xd.drivesafe.Models.UserModel;
@@ -312,6 +313,15 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                                     FirebaseFirestore.getInstance().collection("approved_Drivers").document(userModel.getUserId())
                                             .update("point", userModel.getPoint()-lostpoint);
 
+
+                                    NotificationModel notificationModel = new NotificationModel(reportModel.getReportername()+" is Reported you",System.currentTimeMillis());
+
+                                    FirebaseFirestore.getInstance().collection("Notifications").document(userModel.getUserId())
+                                            .collection("msg").add(notificationModel);
+
+                                    NotificationModel notificationModel2 = new NotificationModel(reportModel.getReportername()+" is Reported " + userModel.getName(),System.currentTimeMillis());
+
+                                    FirebaseFirestore.getInstance().collection("Notificationsadmin").add(notificationModel2);
                                     progressDialog.dismiss();
 
                                     startActivity(new Intent(ReportActivity.this, ReporterMainActivity.class));
@@ -323,10 +333,8 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                             }
                         });
 
-
             }
         });
-
 
     }
 

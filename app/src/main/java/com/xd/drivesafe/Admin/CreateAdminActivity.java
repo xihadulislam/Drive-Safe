@@ -50,12 +50,32 @@ public class CreateAdminActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("Please Wait...!");
-                progressDialog.show();
+
+
+
 
                 String username = Eusername.getText().toString().trim();
                 String email = Eemail.getText().toString().trim();
                 String pass = Epass.getText().toString().trim();
+
+
+                if (username.isEmpty()){
+                    Eusername.setError("Username is Required");
+                    return;
+                }
+                if (email.isEmpty()){
+
+                    Eemail.setError("Email is Required");
+                    return;
+                }
+                if (pass.isEmpty()){
+                    Epass.setError("Password is Required");
+                    return;
+                }
+
+
+                progressDialog.setMessage("Please Wait...!");
+                progressDialog.show();
 
 
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,pass)

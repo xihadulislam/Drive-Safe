@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.xd.drivesafe.FirstActivity;
 import com.xd.drivesafe.LoginActivity;
 import com.xd.drivesafe.Models.NormaluserModel;
+import com.xd.drivesafe.Models.ReporterDataModel;
 import com.xd.drivesafe.R;
 
 public class UserProfileActivity extends AppCompatActivity {
@@ -43,7 +44,60 @@ public class UserProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.user_profile_short_bio);
         signout = findViewById(R.id.signoutTextID);
 
+
+
+        Intent intent = getIntent();
+
+        String val = intent.getStringExtra("key");
+
+
+        if (val.equals("user")){
+
+            showuser();
+
+        }
+        else  if (val.equals("reporter")){
+
+            showreporter();
+        }
+
+
+
         PopUpWindow();
+
+
+
+
+
+
+
+    }
+
+    private void showreporter() {
+
+
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseFirestore.getInstance().collection("Reporterinfo").document(id)
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()){
+
+                    DocumentSnapshot doc  = task.getResult();
+                    ReporterDataModel normaluserModel = doc.toObject(ReporterDataModel.class);
+
+                    name.setText(normaluserModel.getName());
+                    email.setText(normaluserModel.getEmail());
+
+                }
+
+            }
+        });
+
+    }
+
+    private void showuser() {
 
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -67,21 +121,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
-
-
-        signout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-
-            }
-        });
-
-
     }
-
-
 
 
     private void PopUpWindow(){

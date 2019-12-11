@@ -34,7 +34,13 @@ public class FirstActivity extends AppCompatActivity {
 
         }
 
-        if (idnt.equals("no")) {
+        if (idnt==null){
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(FirstActivity.this, LoginActivity.class));
+            finish();
+
+        }
+       else if (idnt.equals("no")) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(FirstActivity.this, LoginActivity.class));
             finish();

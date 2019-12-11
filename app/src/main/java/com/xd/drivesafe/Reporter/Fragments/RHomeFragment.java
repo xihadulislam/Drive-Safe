@@ -5,8 +5,10 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,16 +26,20 @@ import com.blikoon.qrcodescanner.QrCodeActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xd.drivesafe.Admin.DriverlistActivity;
 import com.xd.drivesafe.Admin.ReporterandAdminListActivity;
+import com.xd.drivesafe.Driver.IncidentRulesActivity;
+import com.xd.drivesafe.FirstActivity;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
 import com.xd.drivesafe.Reporter.AllincidentlistRActivity;
 import com.xd.drivesafe.Reporter.ReportActivity;
 import com.xd.drivesafe.Reporter.ReporterMainActivity;
+import com.xd.drivesafe.User.UserProfileActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -48,6 +54,7 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
     private static final int REQUEST_CODE_QR_SCAN = 101;
 
     LinearLayout layout1,layout2,layout3,layout4,layout5,layout6,layout7,layout8;
+    LinearLayout layout9,layout10,layout11;
 
 
 
@@ -68,6 +75,10 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
         layout6 = view.findViewById(R.id.adminlistID);
         layout7 = view.findViewById(R.id.bestdriverlinID);
         layout8 = view.findViewById(R.id.alldriverlinID);
+        layout9 = view.findViewById(R.id.signoutrepoID);
+        layout10 = view.findViewById(R.id.traficruleID);
+        layout11 = view.findViewById(R.id.profileid);
+
 
 
 
@@ -79,6 +90,9 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
         layout6.setOnClickListener(this);
         layout7.setOnClickListener(this);
         layout8.setOnClickListener(this);
+        layout9.setOnClickListener(this);
+        layout10.setOnClickListener(this);
+        layout11.setOnClickListener(this);
 
 
 
@@ -107,12 +121,12 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
                         }
                     });
 
-
-
         }
         else if (v==layout2){
 
-
+            Intent intent = new Intent(getActivity(), AllincidentlistRActivity.class);
+            intent.putExtra("key","own");
+            startActivity(intent);
         }
         else if (v==layout3){
 
@@ -120,7 +134,7 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
         else if (v==layout4){
 
             Intent intent = new Intent(getActivity(), AllincidentlistRActivity.class);
-
+            intent.putExtra("key","all");
             startActivity(intent);
 
         }
@@ -150,6 +164,49 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
 
         }
 
+        else if (v==layout9){
+
+
+            AlertDialog alertDialog = new AlertDialog.Builder(getActivity()).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Do you want to Sign out?");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            storedata("no");
+                            FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(getActivity(), FirstActivity.class));
+
+                            getActivity().finish();
+
+
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            alertDialog.show();
+
+
+
+        }
+        else if (v==layout10){
+
+            Intent intent = new Intent(getActivity(), IncidentRulesActivity.class);
+            startActivity(intent);
+
+        }
+        else if (v==layout11){
+
+            Intent intent = new Intent(getActivity(), UserProfileActivity.class);
+            intent.putExtra("key","reporter");
+            startActivity(intent);
+
+        }
 
 
 
@@ -157,7 +214,12 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
     }
 
 
-
+    private void storedata(String name) {
+        SharedPreferences sharedPreferences =getActivity().getSharedPreferences("identy", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", name);
+        editor.commit();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

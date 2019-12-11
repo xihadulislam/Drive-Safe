@@ -78,7 +78,6 @@ public class CommentActivity extends AppCompatActivity {
 
                 if (!msg.isEmpty()){
 
-
                     CommentModel commentModel = new CommentModel(username,msg,System.currentTimeMillis());
 
                     FirebaseFirestore.getInstance().collection("Report").document(id)

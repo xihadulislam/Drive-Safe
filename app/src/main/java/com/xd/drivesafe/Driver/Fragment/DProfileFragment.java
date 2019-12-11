@@ -1,6 +1,9 @@
 package com.xd.drivesafe.Driver.Fragment;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,11 +29,16 @@ import com.squareup.picasso.Picasso;
 import com.xd.drivesafe.Adapters.AllincidentReporterAdapter;
 import com.xd.drivesafe.Adapters.ReviewAdapter;
 import com.xd.drivesafe.Driver.DriverprofileDActivity;
+import com.xd.drivesafe.Driver.IncidentRulesActivity;
+import com.xd.drivesafe.Driver.PersonalinformationActivity;
+import com.xd.drivesafe.FirstActivity;
+import com.xd.drivesafe.LoginActivity;
 import com.xd.drivesafe.Models.NormaluserModel;
 import com.xd.drivesafe.Models.ReportModel;
 import com.xd.drivesafe.Models.ReviewModel;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
+import com.xd.drivesafe.User.UserMainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -191,13 +199,48 @@ public class DProfileFragment extends Fragment {
 
 
 
+        view.findViewById(R.id.personalinfoID).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), PersonalinformationActivity.class));
+            }
+        });
 
+
+        view.findViewById(R.id.incidentrules).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getActivity(), IncidentRulesActivity.class));
+
+            }
+        });
+
+
+        view.findViewById(R.id.signoutpro).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                storedata("no");
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getActivity(), FirstActivity.class));
+
+                getActivity().finish();
+
+            }
+        });
 
         return view;
     }
 
 
 
+    private void storedata(String name) {
+        SharedPreferences sharedPreferences =getActivity().getSharedPreferences("identy", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", name);
+        editor.commit();
+    }
 
     private void setRecyview() {
 
@@ -232,3 +275,4 @@ public class DProfileFragment extends Fragment {
 
 
 }
+

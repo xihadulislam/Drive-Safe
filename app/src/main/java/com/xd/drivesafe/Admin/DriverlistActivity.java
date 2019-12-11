@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.xd.drivesafe.Adapters.PendingDriversAdapter;
+import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
 
@@ -102,9 +103,8 @@ public class DriverlistActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         UserModel userModel = list.get(position);
-                        Intent intent = new Intent(DriverlistActivity.this,ApprovepageActivity.class);
-                        intent.putExtra("obj",userModel);
-                        intent.putExtra("check","reject");
+                        Intent intent = new Intent(DriverlistActivity.this, DriverprofileDActivity.class);
+                       intent.putExtra("key",userModel.getUserId());
                         startActivity(intent);
                         Animatoo.animateInAndOut(DriverlistActivity.this);
 
@@ -152,9 +152,8 @@ public class DriverlistActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         UserModel userModel = list.get(position);
-                        Intent intent = new Intent(DriverlistActivity.this,ApprovepageActivity.class);
-                        intent.putExtra("obj",userModel);
-                        intent.putExtra("check","reject");
+                        Intent intent = new Intent(DriverlistActivity.this, DriverprofileDActivity.class);
+                        intent.putExtra("key",userModel.getUserId());
                         startActivity(intent);
                         Animatoo.animateInAndOut(DriverlistActivity.this);
 
@@ -162,7 +161,6 @@ public class DriverlistActivity extends AppCompatActivity {
                 });
 
                 listView.setAdapter(adapter);
-
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -201,9 +199,8 @@ public class DriverlistActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         UserModel userModel = list.get(position);
-                        Intent intent = new Intent(DriverlistActivity.this,ApprovepageActivity.class);
-                        intent.putExtra("obj",userModel);
-                        intent.putExtra("check","app");
+                        Intent intent = new Intent(DriverlistActivity.this, DriverprofileDActivity.class);
+                        intent.putExtra("key",userModel.getUserId());
                         startActivity(intent);
                         Animatoo.animateInAndOut(DriverlistActivity.this);
 

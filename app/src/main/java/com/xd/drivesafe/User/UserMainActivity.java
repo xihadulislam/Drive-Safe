@@ -202,7 +202,9 @@ public class UserMainActivity extends AppCompatActivity {
         int id = item.getItemId();
         switch (id){
             case R.id.profilemenu:
-              startActivity(new Intent(UserMainActivity.this,UserProfileActivity.class));
+                Intent intent = new Intent(UserMainActivity.this, UserProfileActivity.class);
+                intent.putExtra("key","user");
+                startActivity(intent);
                 return true;
             case R.id.signout:
                 storedata("no");
