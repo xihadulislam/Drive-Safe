@@ -109,15 +109,24 @@
                                 android:padding="20dp"
                                 android:textColorHint="#FFFCFC" />
 
-                            <com.rengwuxian.materialedittext.MaterialEditText
-                                android:id="@+id/dbirthdateID"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="@string/birth_date_dd_mm_yyyy"
-                                android:inputType="text"
+                            <TextView
+                                android:text="Birthday"
                                 android:padding="20dp"
-                                android:textColorHint="#FFFCFC" />
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
 
+
+                            </TextView>
+
+                            <DatePicker
+                                android:id="@+id/datepikerId"
+                                android:datePickerMode="spinner"
+                                android:calendarViewShown="false"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+
+                            </DatePicker>
 
                             <com.rengwuxian.materialedittext.MaterialEditText
                                 android:id="@+id/dphoneID"
@@ -129,6 +138,7 @@
                                 android:textColorHint="#FFFCFC"
 
                                 />
+
 
 
                             <TextView
@@ -149,6 +159,7 @@
                                 android:orientation="horizontal">
 
                                 <RadioButton
+                                    android:checked="true"
                                     android:id="@+id/maleID"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"

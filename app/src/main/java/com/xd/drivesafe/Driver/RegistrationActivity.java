@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -56,8 +57,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private int STORAGE_PERMISSION_CODE = 1;
     private Button Bregister, Bselestimage;
     private RadioGroup radioGroup;
-    private RadioButton Rmale, Rfemale;
-    private EditText Ename, Enid, Elicense, Eaddress, Ephone, Eownername, Eowneradress, Eownerphone, Enumberplate, Eemail, Epassword, Ebirthdate;
+    private RadioButton radioButton;
+    private EditText Ename, Enid, Elicense, Eaddress, Ephone, Eownername, Eowneradress, Eownerphone, Enumberplate, Eemail, Epassword;
     private ImageView showphoto;
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -71,6 +72,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private String name = null, nid = null, license = null, address = null, phone = null, ownername = null, owneradress = null, ownerphone = null, numberplate = null, email = null, password = null, birthdate = null, gender = null, qrcode = null;
 
+    private DatePicker datePicker;
+
+    String date ;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +88,7 @@ public class RegistrationActivity extends AppCompatActivity {
         Bregister = findViewById(R.id.dregisterID);
         Bselestimage = findViewById(R.id.dselctimageID);
         radioGroup = findViewById(R.id.radiogroup);
-        Rmale = findViewById(R.id.maleID);
-        Rfemale = findViewById(R.id.femaleID);
+
         Ename = findViewById(R.id.dnameID);
         Enid = findViewById(R.id.dnidID);
         Elicense = findViewById(R.id.dlicenseID);
@@ -96,7 +101,8 @@ public class RegistrationActivity extends AppCompatActivity {
         Eemail = findViewById(R.id.demailId);
         Epassword = findViewById(R.id.dpasswordID);
         showphoto = findViewById(R.id.dimageID);
-        Ebirthdate = findViewById(R.id.dbirthdateID);
+
+        datePicker = findViewById(R.id.datepikerId);
 
         progressDialog = new ProgressDialog(this);
 
@@ -125,6 +131,18 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
 
+        findViewById(R.id.backloginpage).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(RegistrationActivity.this,LoginActivity.class));
+                finish();
+                Animatoo.animateZoom(RegistrationActivity.this);
+
+            }
+        });
+
+
 
         Bregister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,12 +160,17 @@ public class RegistrationActivity extends AppCompatActivity {
                 numberplate = Enumberplate.getText().toString().trim();
                 email = Eemail.getText().toString().trim();
                 password = Epassword.getText().toString().trim();
-                birthdate = Ebirthdate.getText().toString().trim();
 
-                if (birthdate.isEmpty()){
-                    Ebirthdate.setError("Birthrate is required");
-                    return;
-                }
+
+                 date = datePicker.getDayOfMonth()+"/"+ (datePicker.getMonth() + 1)+"/"+datePicker.getYear();
+
+
+                int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                 radioButton =  findViewById(selectedId);
+                gender = radioButton.getText().toString();
+
+
 
                 if (password.isEmpty()){
 
@@ -362,8 +385,8 @@ public class RegistrationActivity extends AppCompatActivity {
                                     final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
                                     UserModel userModel = new UserModel(name, nid, license, address, phone, ownername, owneradress, ownerphone,
-                                            numberplate, email, password, ImageUri, null, birthdate,
-                                            "male", System.currentTimeMillis(), System.currentTimeMillis(), 500, userid, (float) 0.0);
+                                            numberplate, email, password, ImageUri, null, date,
+                                            gender, System.currentTimeMillis(), System.currentTimeMillis(), 500, userid, (float) 0.0);
                                     FirebaseFirestore.getInstance().collection("temp_userInfo").document(userid).set(userModel)
                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
@@ -373,7 +396,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                                                     FirebaseFirestore.getInstance().collection("idnty").document(userid).set(identity);
                                                     progressDialog.dismiss();
-                                                    Toast.makeText(RegistrationActivity.this, "success", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(RegistrationActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                                     startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
                                                     Animatoo.animateSlideLeft(RegistrationActivity.this);
                                                     finish();
@@ -385,7 +408,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
                                         }
                                     });
-
 
                                 }
                             });
