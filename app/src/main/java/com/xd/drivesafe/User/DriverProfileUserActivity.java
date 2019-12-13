@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,6 +85,9 @@ public class DriverProfileUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_profile_user);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Driver Profile");
 
         Intent intent = getIntent();
          val = intent.getStringExtra("key");
@@ -164,7 +169,12 @@ public class DriverProfileUserActivity extends AppCompatActivity {
                             name.setText(userModel.getName());
                             address.setText(userModel.getAddress());
                             point.setText(userModel.getPoint()+"");
-                            avgrating.setText(userModel.getAvgrating()/ratingcnt+"");
+
+
+                            float rat = userModel.getAvgrating()/ratingcnt;
+                            String rats = String.format("%.2f", rat);
+                            avgrating.setText(rats);
+
 
                             license.setText("License Number : " + userModel.getLicense());
                             phone.setText("Phone Number : " + userModel.getPhone());
@@ -261,6 +271,9 @@ public class DriverProfileUserActivity extends AppCompatActivity {
 
     }
 
+
+
+
     private void setRecyview2() {
 
         FirebaseFirestore.getInstance().collection("Report").whereEqualTo("userid",val)
@@ -289,7 +302,6 @@ public class DriverProfileUserActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }
@@ -324,4 +336,20 @@ public class DriverProfileUserActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        Animatoo.animateInAndOut(DriverProfileUserActivity.this);
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateInAndOut(DriverProfileUserActivity.this);
+    }
 }
+

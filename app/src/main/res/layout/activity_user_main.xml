@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".User.UserMainActivity">
 
 
@@ -17,6 +18,7 @@
 
 
     <com.irfaan008.irbottomnavigation.SpaceNavigationView
+        android:background="@color/white"
         android:layout_alignParentBottom="true"
         android:id="@+id/space"
         android:layout_width="match_parent"

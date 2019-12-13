@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xd.drivesafe.Admin.DriverlistActivity;
 import com.xd.drivesafe.Admin.ReporterandAdminListActivity;
+import com.xd.drivesafe.Admin.SendSMSActivity;
 import com.xd.drivesafe.Driver.IncidentRulesActivity;
 import com.xd.drivesafe.FirstActivity;
 import com.xd.drivesafe.Models.UserModel;
@@ -129,7 +130,7 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
             startActivity(intent);
         }
         else if (v==layout3){
-
+            startActivity(new Intent(getActivity(), SendSMSActivity.class));
         }
         else if (v==layout4){
 
@@ -139,7 +140,6 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
 
         }
         else if (v==layout5){
-
             Intent intent = new Intent(getActivity(), ReporterandAdminListActivity.class);
             intent.putExtra("key","repo");
             startActivity(intent);

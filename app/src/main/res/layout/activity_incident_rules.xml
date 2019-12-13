@@ -10,12 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/header_cover_image"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:scaleType="centerCrop"
-            android:orientation="horizontal" />
 
         <RelativeLayout
             android:id="@+id/profile_layout"

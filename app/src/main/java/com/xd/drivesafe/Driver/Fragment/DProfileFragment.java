@@ -30,7 +30,10 @@ import com.xd.drivesafe.Adapters.AllincidentReporterAdapter;
 import com.xd.drivesafe.Adapters.ReviewAdapter;
 import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Driver.IncidentRulesActivity;
+import com.xd.drivesafe.Driver.MyIncidentActivity;
+import com.xd.drivesafe.Driver.MyQRcodeActivity;
 import com.xd.drivesafe.Driver.PersonalinformationActivity;
+import com.xd.drivesafe.Driver.PointHistoryActivity;
 import com.xd.drivesafe.FirstActivity;
 import com.xd.drivesafe.LoginActivity;
 import com.xd.drivesafe.Models.NormaluserModel;
@@ -216,6 +219,37 @@ public class DProfileFragment extends Fragment {
             }
         });
 
+        view.findViewById(R.id.myincidentID).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getActivity(), MyIncidentActivity.class));
+
+
+            }
+        });
+
+        view.findViewById(R.id.viewqrcode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), MyQRcodeActivity.class);
+
+                intent.putExtra("key",userModel.getQrcode());
+                startActivity(intent);
+
+            }
+        });
+
+
+        view.findViewById(R.id.pointhis).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), PointHistoryActivity.class));
+
+
+            }
+        });
 
         view.findViewById(R.id.signoutpro).setOnClickListener(new View.OnClickListener() {
             @Override

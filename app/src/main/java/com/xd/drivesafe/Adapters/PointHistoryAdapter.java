@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,15 +23,14 @@ import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Models.CaseModel;
 import com.xd.drivesafe.Models.ReportModel;
 import com.xd.drivesafe.R;
-import com.xd.drivesafe.User.CommentActivity;
-import com.xd.drivesafe.User.DriverProfileUserActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUserAdapter.MyViewHolder> {
+public class PointHistoryAdapter extends  RecyclerView.Adapter<PointHistoryAdapter.MyViewHolder> {
+
 
 
     private Context context;
@@ -40,7 +38,7 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
 
     List<CaseModel>caseModelList ;
 
-    public AllincidentUserAdapter(Context context, List<ReportModel> reportModelList) {
+    public PointHistoryAdapter(Context context, List<ReportModel> reportModelList) {
         this.context = context;
         this.reportModelList = reportModelList;
     }
@@ -48,7 +46,7 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.allincident_item_admin, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.point_history_item, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -57,14 +55,10 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
 
         final ReportModel reportModel = reportModelList.get(position);
 
-        Picasso.get().load(reportModel.getDriverimage()).into(holder.propic);
 
 
-        holder.drivername.setText(reportModel.getDriver_name());
         holder.Title.setText("Case Summary");
-        holder.des.setText(reportModel.getDescription());
-        holder.reportername.setText(reportModel.getReportername());
-        holder.createat.setText(TimeAgo.from(reportModel.getCreateat()));
+        holder.crateat.setText(TimeAgo.from(reportModel.getCreateat()));
 
         FirebaseFirestore.getInstance().collection("Report")
                 .document(reportModel.getRepoid()).collection("case").get()
@@ -78,6 +72,8 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
 
                             String text = "";
 
+                            int total = 0;
+
                             for (DocumentSnapshot doc : task.getResult()){
 
                                 CaseModel caseModel = doc.toObject(CaseModel.class);
@@ -85,54 +81,16 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
                                 caseModelList.add(caseModel);
 
                                 text =  text+ " \u25A0 " +caseModel.getName()+"  [ point - "+caseModel.getPoint()+ " ] \n";
+
+                                total = total + caseModel.getPoint();
                             }
 
                             holder.casetext.setText(text);
-
+                            holder.drivername.setText("Total Lost Point - " + total);
                         }
 
                     }
                 });
-
-
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(context, DriverProfileUserActivity.class);
-                intent.putExtra("key",reportModel.getUserid());
-                context.startActivity(intent);
-                Animatoo.animateSlideUp(context);
-            }
-        });
-
-
-        holder.comments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(context, CommentActivity.class);
-                intent.putExtra("id", reportModel.getRepoid());
-                context.startActivity(intent);
-                Animatoo.animateSlideUp(context);
-            }
-        });
-
-
-        FirebaseFirestore.getInstance().collection("Report").document(reportModel.getRepoid())
-                .collection("comments").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                if (task.isSuccessful()){
-
-
-                    holder.commentText.setText("Comments " +task.getResult().size());
-
-                }
-
-            }
-        });
 
 
     }
@@ -143,7 +101,6 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
     }
 
 
-
     public void setfilter(List<ReportModel> itemData) {
         reportModelList = new ArrayList<>();
         reportModelList.addAll(itemData);
@@ -152,28 +109,26 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
     }
 
 
+
+
     //region ViewHolder class
     class MyViewHolder extends RecyclerView.ViewHolder {
 
 
-        CircleImageView propic;
-        TextView drivername,Title,casetext,des,reportername,createat,commentText;
-        LinearLayout comments;
-        RelativeLayout relativeLayout;
+
+        TextView drivername,Title,casetext,crateat;
+
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            propic  = itemView.findViewById(R.id.itemdriverpropic);
             drivername = itemView.findViewById(R.id.itemdrivernameID);
             Title = itemView.findViewById(R.id.titleitemdriver);
             casetext = itemView.findViewById(R.id.caseitemdriverId);
-            des = itemView.findViewById(R.id.itemcasedescription);
-            reportername = itemView.findViewById(R.id.itemreporterId);
-            createat = itemView.findViewById(R.id.itemcreateatID);
-            commentText = itemView.findViewById(R.id.commentsTextID);
-            comments  = itemView.findViewById(R.id.commentsitemID);
-            relativeLayout = itemView.findViewById(R.id.lin_item);
+            crateat = itemView.findViewById(R.id.itemcreateatID);
+
+
+
 
         }
     }

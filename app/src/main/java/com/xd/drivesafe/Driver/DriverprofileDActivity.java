@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,6 +80,9 @@ public class DriverprofileDActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driverprofile_d);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Driver Profile");
 
         Intent intent = getIntent();
         val = intent.getStringExtra("key");
@@ -154,7 +158,10 @@ public class DriverprofileDActivity extends AppCompatActivity {
                             name.setText(userModel.getName());
                             address.setText(userModel.getAddress());
                             point.setText(userModel.getPoint()+"");
-                            avgrating.setText(userModel.getAvgrating()/ratingcnt+"");
+
+                            float rat = userModel.getAvgrating()/ratingcnt;
+                            String rats = String.format("%.2f", rat);
+                            avgrating.setText(rats);
 
                             license.setText("License Number : " + userModel.getLicense());
                             phone.setText("Phone Number : " + userModel.getPhone());
@@ -269,5 +276,12 @@ public class DriverprofileDActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
+    }
 
 }

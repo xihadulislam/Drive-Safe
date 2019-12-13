@@ -508,6 +508,7 @@
                                 </androidx.cardview.widget.CardView>
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/viewqrcode"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="4dp"
@@ -529,7 +530,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginRight="50dp"
                                                 android:drawableLeft="@drawable/ic_info_outline_black_24dp"
-                                                android:text=" Edit Information"
+                                                android:text=" View QR Code"
                                                 android:textSize="20sp" />
 
                                             <TextView
@@ -547,6 +548,7 @@
 
                                 </androidx.cardview.widget.CardView>
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/pointhis"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="4dp"
@@ -624,6 +626,7 @@
                                 android:orientation="vertical">
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/myincidentID"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="4dp"
@@ -645,7 +648,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_marginRight="50dp"
                                                 android:drawableLeft="@drawable/ic_person"
-                                                android:text=" Settings"
+                                                android:text=" My Incidents"
                                                 android:textSize="20sp" />
 
                                             <TextView

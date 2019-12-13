@@ -87,7 +87,7 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
 
                                 caseModelList.add(caseModel);
 
-                                text =  text+ " \u25A0 " +caseModel.getName()+"\n";
+                                text =  text+ " \u25A0 " +caseModel.getName()+"  [ point - "+caseModel.getPoint()+ " ] \n";
                             }
 
                             holder.casetext.setText(text);

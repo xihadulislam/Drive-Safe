@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -117,7 +118,13 @@ public class UserRegActivity extends AppCompatActivity {
 
 
 
+    }
 
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+        Animatoo.animateSwipeLeft(UserRegActivity.this);
     }
 }
 

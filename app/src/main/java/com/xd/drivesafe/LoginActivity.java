@@ -8,10 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -57,15 +59,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegistrationActivity.class));
+                Animatoo.animateSwipeLeft(LoginActivity.this);
             }
         });
-
 
         findViewById(R.id.texttttt).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 startActivity(new Intent(LoginActivity.this, UserRegActivity.class));
+                Animatoo.animateSwipeRight(LoginActivity.this);
 
             }
         });
@@ -110,22 +112,26 @@ public class LoginActivity extends AppCompatActivity {
                                                     progressDialog.dismiss();
                                                     storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, UserMainActivity.class));
+                                                    Animatoo.animateFade(LoginActivity.this);
                                                     finish();
                                                 }
                                                 if (name.equals("admin")){
                                                     progressDialog.dismiss();
                                                     storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
+                                                    Animatoo.animateFade(LoginActivity.this);
                                                     finish();
                                                 } if (name.equals("reporter")){
                                                     progressDialog.dismiss();
                                                     storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, ReporterMainActivity.class));
+                                                    Animatoo.animateFade(LoginActivity.this);
                                                     finish();
                                                 } if (name.equals("driver")){
                                                     progressDialog.dismiss();
                                                     storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, MainDriverActivity.class));
+                                                    Animatoo.animateFade(LoginActivity.this);
                                                     finish();
                                                 }
                                             }
@@ -148,7 +154,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-
 
     private void storedata(String name) {
         SharedPreferences sharedPreferences = getSharedPreferences("identy", Context.MODE_PRIVATE);

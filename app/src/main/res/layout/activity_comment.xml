@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_bg_light"
+    android:background="@color/white"
     tools:context=".User.CommentActivity">
 
 
@@ -17,6 +17,14 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <ImageView
+        android:id="@+id/noitemID"
+        android:scaleType="centerInside"
+        android:src="@drawable/noitem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ImageView>
 
     <RelativeLayout
         android:padding="5dp"

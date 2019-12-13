@@ -61,6 +61,10 @@ public class UDriverListFragment extends Fragment {
         recyclerView = view.findViewById(R.id.driversrecyId);
         editText = view.findViewById(R.id.editsearchID);
 
+        view.findViewById(R.id.noitemID).setVisibility(View.GONE);
+
+
+
         loadRecylerview();
 
 
@@ -91,7 +95,6 @@ public class UDriverListFragment extends Fragment {
 
             }
         });
-
 
 
 
@@ -157,11 +160,13 @@ public class UDriverListFragment extends Fragment {
                                 UserModel userModel = doc.toObject(UserModel.class);
                                 userModelList.add(userModel);
                                 userModelList.add(userModel);
-                                userModelList.add(userModel);
 
                             }
-
                             pd.dismiss();
+                            if (userModelList.size()==0){
+
+                                getView().findViewById(R.id.noitemID).setVisibility(View.VISIBLE);
+                            }
                              userDriversAdapter = new UserDriversAdapter(getActivity(),userModelList);
 
                             recyclerView.setHasFixedSize(true);

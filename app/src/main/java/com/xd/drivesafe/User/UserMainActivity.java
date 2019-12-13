@@ -168,7 +168,7 @@ public class UserMainActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(UserMainActivity.this, DriverProfileUserActivity.class);
                         intent.putExtra("key",userModel.getUserId());
-                        Animatoo.animateSlideLeft(UserMainActivity.this);
+                        Animatoo.animateInAndOut(UserMainActivity.this);
                         startActivity(intent);
 
                     }
@@ -181,7 +181,6 @@ public class UserMainActivity extends AppCompatActivity {
 
                 }
             });
-
 
 
 
@@ -226,3 +225,4 @@ public class UserMainActivity extends AppCompatActivity {
     }
 
 }
+

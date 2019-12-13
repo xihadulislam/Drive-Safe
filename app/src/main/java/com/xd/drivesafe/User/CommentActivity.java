@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +44,13 @@ public class CommentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("Comments");
+
+
+
         sendbutton = findViewById(R.id.sendbutton);
         sendtext = findViewById(R.id.sendtext);
 
@@ -50,7 +59,6 @@ public class CommentActivity extends AppCompatActivity {
 
 
         id = intent.getStringExtra("id");
-
 
         final String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -117,6 +125,9 @@ public class CommentActivity extends AppCompatActivity {
                         list.add(commentModel);
                     }
 
+                    if (list.size()>0){
+                        findViewById(R.id.noitemID).setVisibility(View.GONE);
+                    }
                     ComentAdapter comentAdapter = new ComentAdapter(CommentActivity.this,list);
                     recyclerView = findViewById(R.id.recychat);
                     recyclerView.setHasFixedSize(true);
@@ -132,7 +143,20 @@ public class CommentActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        Animatoo.animateSlideDown(CommentActivity.this);
+        return super.onOptionsItemSelected(item);
+    }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateSlideDown(CommentActivity.this);
+    }
 }
 

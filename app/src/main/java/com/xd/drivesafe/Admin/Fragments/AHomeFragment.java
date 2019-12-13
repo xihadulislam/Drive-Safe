@@ -26,6 +26,7 @@ import com.blikoon.qrcodescanner.QrCodeActivity;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.tbruyelle.rxpermissions2.RxPermissions;
@@ -34,18 +35,17 @@ import com.xd.drivesafe.Admin.CreateReporterActivity;
 import com.xd.drivesafe.Admin.DriverlistActivity;
 import com.xd.drivesafe.Admin.ReporterandAdminListActivity;
 import com.xd.drivesafe.Admin.RequestDriverActivity;
+import com.xd.drivesafe.Admin.SendSMSActivity;
 import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Models.UserModel;
 import com.xd.drivesafe.R;
 import com.xd.drivesafe.Reporter.AllincidentlistRActivity;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
+
 public class AHomeFragment extends Fragment implements View.OnClickListener {
     public AHomeFragment() {
     }
-
 
     private static final int REQUEST_CODE_QR_SCAN = 101;
     private final String LOGTAG = "QRCScanner-MainActivity";
@@ -87,6 +87,18 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
         layout12.setOnClickListener(AHomeFragment.this);
 
 
+        view.findViewById(R.id.cardddddddddddddddd3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Snackbar.make(getView(),"Coming Soon" , Snackbar.LENGTH_LONG).show();
+
+            }
+        });
+
+
+
+
         return view;
 
     }
@@ -112,13 +124,13 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
 
         else if (v == layout3) {
 
-        } else if (v == layout4) {
+            startActivity(new Intent(getActivity(), SendSMSActivity.class));
 
+        } else if (v == layout4) {
 
             Intent intent = new Intent(getActivity(), AllincidentlistRActivity.class);
             intent.putExtra("key","all");
             startActivity(intent);
-
 
         } else if (v == layout5) {
             Intent intent = new Intent(getActivity(), ReporterandAdminListActivity.class);
@@ -164,7 +176,6 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
         }
 
     }
-
 
 
     @Override

@@ -3,13 +3,27 @@ package com.xd.drivesafe.Driver.Fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.xd.drivesafe.Adapters.NotificationAdapter;
+import com.xd.drivesafe.Models.NotificationModel;
 import com.xd.drivesafe.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,12 +35,60 @@ public class DNotificationFragment extends Fragment {
         // Required empty public constructor
     }
 
+    RecyclerView recyclerView;
+
+
+    List<NotificationModel> notificationModelList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dnotification, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_dnotification, container, false);
+
+
+
+        recyclerView   = view.findViewById(R.id.notificationrecy);
+
+
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance().collection("Notifications")
+                .document(id).collection("msg")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful()){
+
+                            notificationModelList = new ArrayList<>();
+
+                            for (DocumentSnapshot doc : task.getResult()){
+
+                                NotificationModel notificationModel = doc.toObject(NotificationModel.class);
+                                notificationModelList.add(notificationModel);
+                                notificationModelList.add(notificationModel);
+                                notificationModelList.add(notificationModel);
+                                notificationModelList.add(notificationModel);
+
+                            }
+
+
+                            NotificationAdapter adapter = new NotificationAdapter(getActivity(),notificationModelList);
+                            recyclerView.setHasFixedSize(true);
+                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            recyclerView.setAdapter(adapter);
+
+                        }
+
+                    }
+                });
+
+
+
+        return view;
     }
 
 }

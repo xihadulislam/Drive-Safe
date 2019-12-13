@@ -26,8 +26,6 @@ public class AdminMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_main);
 
 
-        getSupportActionBar().hide();
-
 
         ArrayList<Fragment> fragList = new ArrayList<>();
         fragList.add(new AHomeFragment());

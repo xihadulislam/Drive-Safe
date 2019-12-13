@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.squareup.picasso.Picasso;
 import com.xd.drivesafe.Models.UserModel;
@@ -54,6 +55,8 @@ public class UserDriversAdapter extends RecyclerView.Adapter<UserDriversAdapter.
                 Intent intent = new Intent(context, DriverProfileUserActivity.class);
                 intent.putExtra("key",userModel.getUserId());
                 context.startActivity(intent);
+
+                Animatoo.animateInAndOut(context);
 
             }
         });

@@ -19,43 +19,23 @@
             >
 
             <LinearLayout
-                android:background="@color/colorPrimary"
+                android:background="@color/green_inactive"
                 android:layout_width="match_parent"
-                android:layout_height="95dp">
+                android:layout_height="300dp">
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:layout_marginTop="70dp"
-                android:id="@+id/cardddddddddddddddd1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:layout_marginRight="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:drawableLeft="@drawable/ic_search_black_24dp"
-                    android:inputType="text"
-                    android:hint="  Search in this Category"
-                    android:padding="15dp"
-                    android:background="@drawable/edt_bg"
-                    android:id="@+id/editsearchID"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </RelativeLayout>
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardddddddddddddddd2"
                 app:cardCornerRadius="5dp"
                 android:elevation="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="110dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_below="@+id/cardddddddddddddddd1"
                 android:layout_width="match_parent"
                 android:layout_height="300dp">
-
 
                 <LinearLayout
                     android:weightSum="3"
@@ -63,7 +43,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:ignore="ExtraText">
-
 
                     <LinearLayout
                         android:weightSum="4"
@@ -96,8 +75,6 @@
                                 android:layout_height="wrap_content">
 
                             </TextView>
-
-
 
 
                         </LinearLayout>
@@ -499,7 +476,7 @@
                         </ImageView>
 
                         <TextView
-                            android:text="SMS Alert"
+                            android:text="block users"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
@@ -516,13 +493,13 @@
 
                         <ImageView
                             android:src="@drawable/qecodescanner"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
+                            android:layout_width="50dp"
+                            android:layout_height="50dp">
                         </ImageView>
 
                         <TextView
-                            android:text="Scanner"
+                            android:textAlignment="center"
+                            android:text="Coming soon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 

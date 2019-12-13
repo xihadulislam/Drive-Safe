@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_bg_light"
+    android:background="@color/white"
     tools:context=".Admin.Fragments.AProfileFragment">
 
 
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/header_cover_image"
-            android:background="@color/red_inactive"
+            android:background="@color/green_inactive"
             android:elevation="4dp"
             android:paddingBottom="24dp">
 
@@ -76,6 +76,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:textColor="@color/white"
                 android:id="@+id/signoutTextID"
                 android:textSize="20sp"
                 android:gravity="center"
@@ -83,7 +84,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@color/blue_bg_light"
+                android:background="@color/red_inactive"
                 android:clickable="true"
                 android:elevation="4dp"
                 android:padding="10dp"
@@ -94,3 +95,4 @@
 
 
 </ScrollView>
+
