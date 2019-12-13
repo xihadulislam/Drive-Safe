@@ -1,3 +1,23 @@
+
+
+buildscript {
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/'}
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.4, 0.99.99]'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
+
+
+
+
+
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
@@ -13,6 +33,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
+
+
+        manifestPlaceholders = [
+                onesignal_app_id: 'eecf9a58-d166-4a43-b61b-f2260f77edd9',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: '210374098334'
+        ]
+
 
     }
     buildTypes {
@@ -88,5 +116,10 @@ dependencies {
     //camera permission
     implementation 'com.github.tbruyelle:rxpermissions:0.10.1'
     implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
+
+
+    implementation 'com.onesignal:OneSignal:[3.11.2, 3.99.99]'
+
+
 
 }

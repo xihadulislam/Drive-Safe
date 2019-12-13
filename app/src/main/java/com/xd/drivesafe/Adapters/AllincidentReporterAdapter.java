@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -106,6 +107,7 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
                 intent.putExtra("key",reportModel.getUserid());
                 context.startActivity(intent);
 
+                Animatoo.animateInAndOut(context);
             }
         });
 
@@ -124,7 +126,6 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
 
             }
         });
-
 
 
 

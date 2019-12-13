@@ -408,6 +408,8 @@
 
 
                                 <TextView
+                                    android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+                                    android:id="@+id/morereview"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="right"
@@ -668,6 +670,7 @@
                                 </androidx.cardview.widget.CardView>
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/notifisettings"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="4dp"
@@ -708,6 +711,7 @@
                                 </androidx.cardview.widget.CardView>
 
                                 <androidx.cardview.widget.CardView
+                                    android:visibility="gone"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="4dp"

@@ -112,26 +112,26 @@ public class LoginActivity extends AppCompatActivity {
                                                     progressDialog.dismiss();
                                                     storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, UserMainActivity.class));
-                                                    Animatoo.animateFade(LoginActivity.this);
+                                                    Animatoo.animateZoom(LoginActivity.this);
                                                     finish();
                                                 }
                                                 if (name.equals("admin")){
                                                     progressDialog.dismiss();
                                                     storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, AdminMainActivity.class));
-                                                    Animatoo.animateFade(LoginActivity.this);
+                                                    Animatoo.animateZoom(LoginActivity.this);
                                                     finish();
                                                 } if (name.equals("reporter")){
                                                     progressDialog.dismiss();
                                                     storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, ReporterMainActivity.class));
-                                                    Animatoo.animateFade(LoginActivity.this);
+                                                    Animatoo.animateZoom(LoginActivity.this);
                                                     finish();
                                                 } if (name.equals("driver")){
                                                     progressDialog.dismiss();
                                                     storedata(name);
                                                     startActivity(new Intent(LoginActivity.this, MainDriverActivity.class));
-                                                    Animatoo.animateFade(LoginActivity.this);
+                                                    Animatoo.animateZoom(LoginActivity.this);
                                                     finish();
                                                 }
                                             }

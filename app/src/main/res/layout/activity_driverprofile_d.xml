@@ -433,6 +433,7 @@
 
 
                                 <TextView
+                                    android:id="@+id/morereview"
                                     android:gravity="center_vertical"
                                     android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
                                     android:layout_marginBottom="5dp"

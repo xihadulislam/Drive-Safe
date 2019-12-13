@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -53,6 +54,8 @@ public class DHomeFragment extends Fragment {
 
     AllincidentReporterAdapter adapter ;
 
+    ProgressBar progressBar;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +65,7 @@ public class DHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dhome, container, false);
 
 
+        progressBar = view.findViewById(R.id.prog);
 
         search = view.findViewById(R.id.editsearchID);
         recyclerView = view.findViewById(R.id.userrecyID);
@@ -138,7 +142,9 @@ public class DHomeFragment extends Fragment {
     private void loadRecylerview() {
 
 
-        progressDialog.show();
+
+        progressBar.setVisibility(View.VISIBLE);
+
 
         FirebaseFirestore.getInstance().collection("Report").orderBy("createat", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -157,7 +163,8 @@ public class DHomeFragment extends Fragment {
 
                     }
 
-                    progressDialog.dismiss();
+                    progressBar.setVisibility(View.GONE);
+
                     adapter = new AllincidentReporterAdapter(getActivity(),reportModelList);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                     recyclerView.setLayoutManager(linearLayoutManager);
@@ -170,9 +177,7 @@ public class DHomeFragment extends Fragment {
         });
 
 
-
     }
-
 
 
 }

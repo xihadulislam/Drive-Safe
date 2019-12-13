@@ -114,9 +114,7 @@ public class ASearchFragment extends Fragment {
 
                     userDriversAdapter = new UserDriversAdapter(getActivity(), userModelList);
 
-
                 }
-
 
             }
         });
@@ -124,7 +122,6 @@ public class ASearchFragment extends Fragment {
         searchcard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 if (userModelList.size()!=1){
 
@@ -134,6 +131,10 @@ public class ASearchFragment extends Fragment {
 
                     userDriversAdapter.setfilter(newList);
 
+                    if (qu.isEmpty()){
+                        Log.d(TAG, "onClick: ");
+                        return;
+                    }
 
                     if (newList.size() != 0) {
                         Log.d(TAG, "onQueryTextChange: " + newList.get(0).getPhone());
@@ -148,11 +149,8 @@ public class ASearchFragment extends Fragment {
 
                 }
 
-
-
             }
         });
-
 
 
 

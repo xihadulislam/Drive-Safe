@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
 import com.gauravk.bubblenavigation.BubbleNavigationLinearView;
 import com.gauravk.bubblenavigation.listener.BubbleNavigationChangeListener;
+import com.onesignal.OneSignal;
 import com.xd.drivesafe.Adapters.ScreenSlidePageFragment;
 import com.xd.drivesafe.Driver.Fragment.DHomeFragment;
 import com.xd.drivesafe.Driver.Fragment.DNotificationFragment;
@@ -25,6 +28,23 @@ public class MainDriverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_main);
 
+        // OneSignal Initialization
+        OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+        SharedPreferences sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
+
+        boolean swmute = sharedPreferences.getBoolean("mute", false);
+
+        if (swmute) {
+            OneSignal.setSubscription(false);
+        } else {
+            OneSignal.setSubscription(true);
+        }
+
+        ///////////////////////////////////////////////////////
+
 
         ArrayList<Fragment> fragList = new ArrayList<>();
         fragList.add(new DHomeFragment());
@@ -39,9 +59,9 @@ public class MainDriverActivity extends AppCompatActivity {
 
         //   bubbleNavigationLinearView.setBackgroundColor(R.color.colorPrimary);
 
-        bubbleNavigationLinearView.setBadgeValue(0, "40");
+        bubbleNavigationLinearView.setBadgeValue(0, null);
         bubbleNavigationLinearView.setBadgeValue(1, null); //invisible badge
-        bubbleNavigationLinearView.setBadgeValue(2, "7");
+        bubbleNavigationLinearView.setBadgeValue(2, null);
 
 
         final ViewPager viewPager = findViewById(R.id.view_pager);
@@ -71,4 +91,3 @@ public class MainDriverActivity extends AppCompatActivity {
 
     }
 }
-

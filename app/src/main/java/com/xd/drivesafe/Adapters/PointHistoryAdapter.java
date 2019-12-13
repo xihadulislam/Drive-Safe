@@ -92,8 +92,8 @@ public class PointHistoryAdapter extends  RecyclerView.Adapter<PointHistoryAdapt
                     }
                 });
 
-
     }
+
 
     @Override
     public int getItemCount() {

@@ -5,6 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".Driver.Fragment.DHomeFragment">
 
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/prog"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </ProgressBar>
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

@@ -33,6 +33,7 @@ import com.xd.drivesafe.Adapters.AllincidentReporterAdapter;
 import com.xd.drivesafe.Adapters.AllincidentUserAdapter;
 import com.xd.drivesafe.Adapters.ReviewAdapter;
 import com.xd.drivesafe.Driver.DriverprofileDActivity;
+import com.xd.drivesafe.Driver.ReviewActivity;
 import com.xd.drivesafe.Models.NormaluserModel;
 import com.xd.drivesafe.Models.ReportModel;
 import com.xd.drivesafe.Models.ReviewModel;
@@ -267,6 +268,18 @@ public class DriverProfileUserActivity extends AppCompatActivity {
 
             }
         });
+
+
+        findViewById(R.id.morereview).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(DriverProfileUserActivity.this, ReviewActivity.class);
+                intent.putExtra("key",userModel.getUserId());
+                startActivity(intent);
+            }
+        });
+
 
 
     }

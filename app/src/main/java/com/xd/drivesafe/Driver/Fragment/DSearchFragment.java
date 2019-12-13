@@ -133,15 +133,20 @@ public class DSearchFragment extends Fragment {
                 String qu = editText.getText().toString().trim();
 
                 List<UserModel> newList = filter(userModelList, qu);
-
                 userDriversAdapter.setfilter(newList);
 
+                if (qu.isEmpty()){
+                    Log.d(TAG, "onClick: ");
+                    return;
+                }
+                
                 if (newList.size() != 0) {
                     Log.d(TAG, "onQueryTextChange: " + newList.get(0).getPhone());
                     Intent intent = new Intent(getActivity(), DriverprofileDActivity.class);
                     intent.putExtra("key", newList.get(0).getUserId());
                     Animatoo.animateSlideLeft(getActivity());
                     startActivity(intent);
+                    Animatoo.animateInAndOut(getActivity());
                 } else {
                     Toast.makeText(getActivity(), "No result found.", Toast.LENGTH_SHORT).show();
                 }
@@ -254,12 +259,12 @@ public class DSearchFragment extends Fragment {
                         intent.putExtra("key", userModel.getUserId());
                         Animatoo.animateSlideLeft(getActivity());
                         startActivity(intent);
+                        Animatoo.animateInAndOut(getActivity());
 
                     } else {
                         pd.dismiss();
                         Toast.makeText(getActivity(), "You are in offline", Toast.LENGTH_SHORT).show();
                     }
-
 
                 }
             });
@@ -267,6 +272,5 @@ public class DSearchFragment extends Fragment {
 
         }
     }
-
 
 }

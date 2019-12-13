@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,8 +33,10 @@ import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Driver.IncidentRulesActivity;
 import com.xd.drivesafe.Driver.MyIncidentActivity;
 import com.xd.drivesafe.Driver.MyQRcodeActivity;
+import com.xd.drivesafe.Driver.NotificationSettingsActivity;
 import com.xd.drivesafe.Driver.PersonalinformationActivity;
 import com.xd.drivesafe.Driver.PointHistoryActivity;
+import com.xd.drivesafe.Driver.ReviewActivity;
 import com.xd.drivesafe.FirstActivity;
 import com.xd.drivesafe.LoginActivity;
 import com.xd.drivesafe.Models.NormaluserModel;
@@ -201,11 +204,11 @@ public class DProfileFragment extends Fragment {
         });
 
 
-
         view.findViewById(R.id.personalinfoID).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), PersonalinformationActivity.class));
+                Animatoo.animateZoom(getActivity());
             }
         });
 
@@ -215,7 +218,7 @@ public class DProfileFragment extends Fragment {
             public void onClick(View v) {
 
                 startActivity(new Intent(getActivity(), IncidentRulesActivity.class));
-
+                Animatoo.animateSwipeLeft(getActivity());
             }
         });
 
@@ -224,7 +227,7 @@ public class DProfileFragment extends Fragment {
             public void onClick(View v) {
 
                 startActivity(new Intent(getActivity(), MyIncidentActivity.class));
-
+                Animatoo.animateSplit(getActivity());
 
             }
         });
@@ -237,7 +240,7 @@ public class DProfileFragment extends Fragment {
 
                 intent.putExtra("key",userModel.getQrcode());
                 startActivity(intent);
-
+                Animatoo.animateInAndOut(getActivity());
             }
         });
 
@@ -247,9 +250,30 @@ public class DProfileFragment extends Fragment {
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), PointHistoryActivity.class));
 
-
+                Animatoo.animateZoom(getActivity());
             }
         });
+
+        view.findViewById(R.id.morereview).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), ReviewActivity.class);
+                intent.putExtra("key",userModel.getUserId());
+                startActivity(intent);
+                Animatoo.animateSlideUp(getActivity());
+            }
+        });
+
+        view.findViewById(R.id.notifisettings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getActivity(), NotificationSettingsActivity.class));
+                Animatoo.animateSwipeRight(getActivity());
+            }
+        });
+
 
         view.findViewById(R.id.signoutpro).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -260,7 +284,7 @@ public class DProfileFragment extends Fragment {
                 startActivity(new Intent(getActivity(), FirstActivity.class));
 
                 getActivity().finish();
-
+                Animatoo.animateZoom(getActivity());
             }
         });
 
@@ -306,7 +330,6 @@ public class DProfileFragment extends Fragment {
 
 
     }
-
 
 }
 

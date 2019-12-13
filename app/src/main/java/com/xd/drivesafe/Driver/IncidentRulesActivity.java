@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.xd.drivesafe.R;
 
 public class IncidentRulesActivity extends AppCompatActivity {
@@ -24,7 +25,13 @@ public class IncidentRulesActivity extends AppCompatActivity {
 
         if (item.getItemId() == android.R.id.home)
             finish();
+        Animatoo.animateSwipeLeft(IncidentRulesActivity.this);
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateSwipeLeft(IncidentRulesActivity.this);
+    }
 }

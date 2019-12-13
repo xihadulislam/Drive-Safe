@@ -12,13 +12,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Driver.ReviewActivity"></activity>
+        <activity android:name=".Driver.NotificationSettingsActivity"></activity>
+        <activity android:name=".Driver.ReviewActivity" />
         <activity android:name=".Driver.PointHistoryActivity" />
         <activity android:name=".Driver.MyIncidentActivity" />
         <activity android:name=".Driver.MyQRcodeActivity" />

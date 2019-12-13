@@ -209,6 +209,18 @@ public class DriverprofileDActivity extends AppCompatActivity {
         });
 
 
+        findViewById(R.id.morereview).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(DriverprofileDActivity.this, ReviewActivity.class);
+                intent.putExtra("key",userModel.getUserId());
+                startActivity(intent);
+            }
+        });
+
+
+
     }
 
 
@@ -246,7 +258,6 @@ public class DriverprofileDActivity extends AppCompatActivity {
     }
 
     private void setRecyview() {
-
         FirebaseFirestore.getInstance().collection("approved_Drivers").document(val)
                 .collection("Reviews").orderBy("createat", Query.Direction.DESCENDING).limit(3).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -259,14 +270,11 @@ public class DriverprofileDActivity extends AppCompatActivity {
 
                         ReviewModel reviewModel = doc.toObject(ReviewModel.class);
                         reviewModelList.add(reviewModel);
-
                     }
-
                     ReviewAdapter adapter = new ReviewAdapter(DriverprofileDActivity.this,reviewModelList);
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(DriverprofileDActivity.this));
                     recyclerView.setAdapter(adapter);
-
 
                 }
 

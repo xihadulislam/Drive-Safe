@@ -4,6 +4,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="onesignalappid">eecf9a58-d166-4a43-b61b-f2260f77edd9</string>
+
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
