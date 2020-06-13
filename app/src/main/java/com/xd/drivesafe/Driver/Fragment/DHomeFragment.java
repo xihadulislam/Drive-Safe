@@ -65,10 +65,10 @@ public class DHomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dhome, container, false);
 
 
-        progressBar = view.findViewById(R.id.prog);
+        progressBar = view.findViewById(R.id.prog3);
 
-        search = view.findViewById(R.id.editsearchID);
-        recyclerView = view.findViewById(R.id.userrecyID);
+        search = view.findViewById(R.id.editsearchID3);
+        recyclerView = view.findViewById(R.id.userrecyID3);
 
         progressDialog = new ProgressDialog(getActivity());
 
@@ -146,6 +146,8 @@ public class DHomeFragment extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
 
 
+
+
         FirebaseFirestore.getInstance().collection("Report").orderBy("createat", Query.Direction.DESCENDING)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -157,8 +159,6 @@ public class DHomeFragment extends Fragment {
                     for (DocumentSnapshot doc : task.getResult()){
 
                         ReportModel reportModel = doc.toObject(ReportModel.class);
-                        reportModelList.add(reportModel);
-                        reportModelList.add(reportModel);
                         reportModelList.add(reportModel);
 
                     }

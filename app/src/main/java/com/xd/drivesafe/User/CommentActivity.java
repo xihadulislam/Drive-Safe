@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
@@ -29,6 +33,8 @@ import java.util.ArrayList;
 public class CommentActivity extends AppCompatActivity {
 
 
+
+    RelativeLayout relativeLayout;
 
     ImageView sendbutton;
     MaterialEditText sendtext;
@@ -50,6 +56,8 @@ public class CommentActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Comments");
 
 
+        relativeLayout = findViewById(R.id.ttr);
+
 
         sendbutton = findViewById(R.id.sendbutton);
         sendtext = findViewById(R.id.sendtext);
@@ -59,30 +67,48 @@ public class CommentActivity extends AppCompatActivity {
 
 
         id = intent.getStringExtra("id");
+       String  show = intent.getStringExtra("show");
+
+        showcomment();
+
+        if (show.equals("no")){
+            relativeLayout.setVisibility(View.GONE);
+        }
+
+
+
 
         final String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-
-        FirebaseFirestore.getInstance().collection("userinfo").document(user)
+        FirebaseFirestore.getInstance().collection("NormalUserinfo").document(user)
                 .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (!isConnected()){
+                    Toast.makeText(CommentActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 DocumentSnapshot document = task.getResult();
                 String value = document.getString("username");
                 username=value;
 
+
             }
         });
-
-
-        showcomment();
 
 
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String msg = sendtext.getText().toString();
+
+                if (!isConnected()){
+                    Toast.makeText(CommentActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
                 if (!msg.isEmpty()){
 
@@ -107,6 +133,11 @@ public class CommentActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
 
     private void showcomment() {
 
@@ -158,5 +189,22 @@ public class CommentActivity extends AppCompatActivity {
         super.onBackPressed();
         Animatoo.animateSlideDown(CommentActivity.this);
     }
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+        }
+        return connected;
+    }
+
+
+
+
 }
 

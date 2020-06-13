@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -33,6 +37,7 @@ public class ReporterandAdminListActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
 
+    ImageView imageView;
 
 
     @Override
@@ -40,14 +45,22 @@ public class ReporterandAdminListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reporterand_admin_list);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        listView = findViewById(R.id.mainlistId23);
+
+
+        imageView = findViewById(R.id.noitemID11);
+        listView = findViewById(R.id.mainlistId231);
         progressDialog = new ProgressDialog(this);
 
 
         Intent intent = getIntent();
 
         String val = intent.getStringExtra("key");
+
+
+        imageView.setVisibility(View.GONE);
 
 
         if (val.equals("admin")){
@@ -91,6 +104,10 @@ public class ReporterandAdminListActivity extends AppCompatActivity {
 
                     progressDialog.dismiss();
 
+                    if (listModelList.size()==0){
+                        imageView.setVisibility(View.VISIBLE);
+                    }
+
                     AdminRepoterAdapter adapter = new AdminRepoterAdapter(ReporterandAdminListActivity.this,listModelList);
                     listView.setAdapter(adapter);
 
@@ -119,10 +136,12 @@ public class ReporterandAdminListActivity extends AppCompatActivity {
                         ReporterDataModel userModel = doc.toObject(ReporterDataModel.class);
 
                         listModelList.add(userModel);
-
                     }
-
                     progressDialog.dismiss();
+
+                    if (listModelList.size()==0){
+                        imageView.setVisibility(View.VISIBLE);
+                    }
 
                     AdminRepoterAdapter adapter = new AdminRepoterAdapter(ReporterandAdminListActivity.this,listModelList);
                     listView.setAdapter(adapter);
@@ -133,5 +152,24 @@ public class ReporterandAdminListActivity extends AppCompatActivity {
         });
 
 
+    }
+
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        Animatoo.animateInAndOut(ReporterandAdminListActivity.this);
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateInAndOut(ReporterandAdminListActivity.this);
     }
 }

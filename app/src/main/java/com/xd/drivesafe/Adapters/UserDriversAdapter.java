@@ -1,7 +1,9 @@
 package com.xd.drivesafe.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.squareup.picasso.Picasso;
 import com.xd.drivesafe.Models.UserModel;
+import com.xd.drivesafe.MyApp;
 import com.xd.drivesafe.R;
 import com.xd.drivesafe.User.DriverProfileUserActivity;
 
@@ -22,6 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDriversAdapter extends RecyclerView.Adapter<UserDriversAdapter.MyViewHolder> {
+
+
+    boolean flg;
 
     Context context;
 
@@ -52,11 +60,50 @@ public class UserDriversAdapter extends RecyclerView.Adapter<UserDriversAdapter.
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, DriverProfileUserActivity.class);
-                intent.putExtra("key",userModel.getUserId());
-                context.startActivity(intent);
 
-                Animatoo.animateInAndOut(context);
+                if (MyApp.ck==2 && !flg){
+
+                    new TTFancyGifDialog.Builder((Activity) context)
+                            .setTitle("Subscription Notice")
+                            .setMessage("For visiting all divers profile you need to subscribe our system." +
+                                    "\n\n"+
+                                    "To subscribe this write “start drivesafe” and send to 21213 from any airtel or Robi operator"
+                                    + "\n\n"+
+                                    "you will get a code and submit this code here"
+
+                            )
+                            .setPositiveBtnText("Send SMS")
+                            .setPositiveBtnBackground("#22b573")
+                            .setNegativeBtnBackground("#22b573")
+                            .setGifResource(R.drawable.gif1)
+                            .isCancellable(true)
+                            .OnPositiveClicked(new TTFancyGifDialogListener() {
+                                @Override
+                                public void OnClick() {
+
+                                    Uri uri = Uri.parse("smsto:21213");
+                                    Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+                                    intent.putExtra("sms_body", "start drivesafe");
+                                    context.startActivity(intent);
+                                }
+                            })
+
+                            .build();
+                }
+                else {
+                    MyApp.ck+=1;
+
+                    Intent intent = new Intent(context, DriverProfileUserActivity.class);
+                    intent.putExtra("key",userModel.getUserId());
+                    context.startActivity(intent);
+
+                    Animatoo.animateInAndOut(context);
+
+                }
+
+
+
+
 
             }
         });

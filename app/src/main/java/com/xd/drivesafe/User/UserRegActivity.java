@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,13 +55,15 @@ public class UserRegActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.setMessage("Please Wait...!");
-                progressDialog.show();
 
                 String username = Eusername.getText().toString().trim();
                 String email = Eemail.getText().toString().trim();
                 String pass = Epass.getText().toString().trim();
 
+                if (!isConnected()){
+                    Toast.makeText(UserRegActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 if (username.isEmpty()){
                     Eusername.setError("Username Required");
@@ -74,6 +79,10 @@ public class UserRegActivity extends AppCompatActivity {
                     Epass.setError("Password required");
                     return;
                 }
+
+
+                progressDialog.setMessage("Please Wait...!");
+                progressDialog.show();
 
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,pass)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -119,6 +128,23 @@ public class UserRegActivity extends AppCompatActivity {
 
 
     }
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+
+        }
+        return connected;
+    }
+
+
+
 
     @Override
     public void onBackPressed() {

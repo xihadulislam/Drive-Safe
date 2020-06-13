@@ -144,8 +144,7 @@ public class UHomeFragment extends Fragment {
 
                         ReportModel reportModel = doc.toObject(ReportModel.class);
                         reportModelList.add(reportModel);
-                        reportModelList.add(reportModel);
-                        reportModelList.add(reportModel);
+
 
                     }
 
@@ -160,7 +159,6 @@ public class UHomeFragment extends Fragment {
 
             }
         });
-
 
 
     }

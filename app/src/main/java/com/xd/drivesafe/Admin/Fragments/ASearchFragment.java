@@ -71,8 +71,8 @@ public class ASearchFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_asearch, container, false);
 
         searchcard = view.findViewById(R.id.cardsearch1);
-        scannerRely = view.findViewById(R.id.scannerrelyID);
-        editText = view.findViewById(R.id.searchesittextID);
+        scannerRely = view.findViewById(R.id.scannerrelyID1);
+        editText = view.findViewById(R.id.searchesittextID1);
 
 
         scannerRely.setOnClickListener(new View.OnClickListener() {

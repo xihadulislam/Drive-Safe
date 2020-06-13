@@ -128,40 +128,44 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
             Intent intent = new Intent(getActivity(), AllincidentlistRActivity.class);
             intent.putExtra("key","own");
             startActivity(intent);
+            Animatoo.animateSwipeRight(getActivity());
         }
         else if (v==layout3){
             startActivity(new Intent(getActivity(), SendSMSActivity.class));
+            Animatoo.animateZoom(getActivity());
         }
         else if (v==layout4){
 
             Intent intent = new Intent(getActivity(), AllincidentlistRActivity.class);
             intent.putExtra("key","all");
             startActivity(intent);
-
+            Animatoo.animateSwipeRight(getActivity());
         }
         else if (v==layout5){
             Intent intent = new Intent(getActivity(), ReporterandAdminListActivity.class);
             intent.putExtra("key","repo");
             startActivity(intent);
+            Animatoo.animateSwipeRight(getActivity());
 
         } else if (v==layout6){
             Intent intent = new Intent(getActivity(), DriverlistActivity.class);
             intent.putExtra("key","dng");
             startActivity(intent);
-
+            Animatoo.animateZoom(getActivity());
 
         } else if (v==layout7){
 
             Intent intent = new Intent(getActivity(), DriverlistActivity.class);
             intent.putExtra("key","best");
             startActivity(intent);
+            Animatoo.animateZoom(getActivity());
         }
         else if (v==layout8){
 
             Intent intent = new Intent(getActivity(), DriverlistActivity.class);
             intent.putExtra("key","all");
             startActivity(intent);
-
+            Animatoo.animateZoom(getActivity());
         }
 
         else if (v==layout9){
@@ -179,7 +183,7 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
                             startActivity(new Intent(getActivity(), FirstActivity.class));
 
                             getActivity().finish();
-
+                            Animatoo.animateZoom(getActivity());
 
                         }
                     });
@@ -192,12 +196,13 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
             alertDialog.show();
 
 
-
         }
         else if (v==layout10){
 
             Intent intent = new Intent(getActivity(), IncidentRulesActivity.class);
             startActivity(intent);
+
+            Animatoo.animateSwipeRight(getActivity());
 
         }
         else if (v==layout11){
@@ -206,8 +211,8 @@ public class RHomeFragment extends Fragment  implements View.OnClickListener {
             intent.putExtra("key","reporter");
             startActivity(intent);
 
-        }
 
+        }
 
 
 

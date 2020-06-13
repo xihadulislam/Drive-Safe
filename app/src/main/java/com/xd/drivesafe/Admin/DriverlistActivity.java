@@ -7,8 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
@@ -37,16 +39,22 @@ public class DriverlistActivity extends AppCompatActivity {
     List<UserModel> list = new ArrayList<>();
     private ProgressDialog progressDialog;
 
-
-
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driverlist);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        listView = findViewById(R.id.driverslistviewId);
+
+
+
+
+        imageView = findViewById(R.id.noitemID1);
+        listView = findViewById(R.id.driverslistviewId1);
         progressDialog = new ProgressDialog(this);
 
 
@@ -54,6 +62,8 @@ public class DriverlistActivity extends AppCompatActivity {
 
         String val = intent.getStringExtra("key");
 
+
+        imageView.setVisibility(View.GONE);
 
         if (val.equals("best")){
 
@@ -96,6 +106,10 @@ public class DriverlistActivity extends AppCompatActivity {
 
                 }
                 progressDialog.dismiss();
+
+                if (list.size()==0){
+                    imageView.setVisibility(View.VISIBLE);
+                }
 
                 PendingDriversAdapter adapter = new PendingDriversAdapter(DriverlistActivity.this,list);
 
@@ -145,6 +159,10 @@ public class DriverlistActivity extends AppCompatActivity {
 
                 }
                 progressDialog.dismiss();
+
+                if (list.size()==0){
+                    imageView.setVisibility(View.VISIBLE);
+                }
 
                 PendingDriversAdapter adapter = new PendingDriversAdapter(DriverlistActivity.this,list);
 
@@ -219,8 +237,21 @@ public class DriverlistActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        Animatoo.animateZoom(DriverlistActivity.this);
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateZoom(DriverlistActivity.this);
+    }
 }

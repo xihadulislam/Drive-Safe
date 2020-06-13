@@ -10,8 +10,8 @@
 
 
     <androidx.viewpager.widget.ViewPager
-        android:layout_above="@+id/bottom_navigation_view"
-        android:id="@+id/view_pager"
+        android:layout_above="@+id/bottom_navigation_view1"
+        android:id="@+id/view_pager1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,10 +19,7 @@
 
     <com.gauravk.bubblenavigation.BubbleNavigationLinearView
         android:verticalScrollbarPosition="defaultPosition"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="2dp"
-        android:id="@+id/bottom_navigation_view"
+        android:id="@+id/bottom_navigation_view1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -35,7 +32,7 @@
 
         <com.gauravk.bubblenavigation.BubbleToggleView
 
-            android:id="@+id/l_item_home"
+            android:id="@+id/l_item_home1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -46,7 +43,7 @@
             app:bt_title="@string/home" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/l_item_search"
+            android:id="@+id/l_item_search1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -58,7 +55,7 @@
             app:bt_title="@string/search" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/l_item_profile_list"
+            android:id="@+id/l_item_profile_list1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
@@ -70,7 +67,7 @@
             app:bt_title="@string/notification" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/l_item_profile"
+            android:id="@+id/l_item_profile1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_colorActive="@color/red_active"

@@ -8,18 +8,7 @@
     tools:context=".Admin.Fragments.ASearchFragment">
 
 
-    <androidx.cardview.widget.CardView
-        app:cardCornerRadius="5dp"
-        app:cardElevation="4dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
     <LinearLayout
-        android:layout_marginBottom="10dp"
         android:background="@color/green_inactive"
         android:gravity="center"
         android:orientation="vertical"
@@ -50,7 +39,7 @@
             <EditText
                 android:layout_marginRight="46dp"
                 android:layout_centerVertical="true"
-                android:id="@+id/searchesittextID"
+                android:id="@+id/searchesittextID1"
                 android:hint="Search or Type Here"
                 android:drawablePadding="4dp"
                 android:drawableLeft="@drawable/ic_search_black_24dp"
@@ -67,7 +56,7 @@
                 android:layout_height="45dp">
 
                 <RelativeLayout
-                    android:id="@+id/scannerrelyID"
+                    android:id="@+id/scannerrelyID1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
@@ -106,5 +95,5 @@
 
     </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

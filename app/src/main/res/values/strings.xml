@@ -6,6 +6,7 @@
 
     <string name="onesignalappid">eecf9a58-d166-4a43-b61b-f2260f77edd9</string>
 
+    <string name="we_will_mail_you_a_link_after_when_you_provide_email_and_click_send_button_then_please_click_on_that_link_to_reset_your_password">We will mail you a link after when you provide email and click Send button.Then please click on that link to reset your password.</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>

@@ -11,11 +11,19 @@
         >
     </item>
 
+<!--    <item-->
+<!--        android:id="@+id/submitcode"-->
+<!--        android:title="Submit subscription Code"-->
+<!--        >-->
+<!--    </item>-->
     <item
         android:id="@+id/signout"
         android:title="Sign Out"
         >
     </item>
+
+
+
 
 </menu>
 

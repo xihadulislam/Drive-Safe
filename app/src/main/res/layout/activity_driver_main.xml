@@ -6,22 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".Driver.MainDriverActivity">
 
+
     <androidx.viewpager.widget.ViewPager
-        android:layout_above="@+id/bottom_navigation_view_linear"
-        android:id="@+id/view_pager"
+        android:layout_above="@+id/bottom_navigation_view_linear2"
+        android:id="@+id/view_pager2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </androidx.viewpager.widget.ViewPager>
 
-    
     <com.gauravk.bubblenavigation.BubbleNavigationLinearView
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginBottom="2dp"
         android:layout_alignParentBottom="true"
         android:padding="7dp"
-        android:id="@+id/bottom_navigation_view_linear"
+        android:id="@+id/bottom_navigation_view_linear2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/bag_right"
@@ -32,7 +32,7 @@
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:layout_marginRight="5dp"
-            android:id="@+id/l_item_home"
+            android:id="@+id/l_item_home2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_colorActive="@color/red_active"
@@ -43,7 +43,7 @@
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:layout_marginRight="5dp"
-            android:id="@+id/l_item_search"
+            android:id="@+id/l_item_search2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_badgeBackgroundColor="@color/green_active"
@@ -55,7 +55,7 @@
 
         <com.gauravk.bubblenavigation.BubbleToggleView
             android:layout_marginRight="5dp"
-            android:id="@+id/l_item_profile_list"
+            android:id="@+id/l_item_profile_list2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_colorActive="@color/blue_grey_active"
@@ -65,7 +65,7 @@
             app:bt_title="@string/notification" />
 
         <com.gauravk.bubblenavigation.BubbleToggleView
-            android:id="@+id/l_item_profile"
+            android:id="@+id/l_item_profile2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:bt_colorActive="@color/red_active"

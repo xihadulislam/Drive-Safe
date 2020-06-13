@@ -54,7 +54,7 @@ public class MainDriverActivity extends AppCompatActivity {
 
         ScreenSlidePageFragment pagerAdapter = new ScreenSlidePageFragment(fragList, getSupportFragmentManager());
 
-        final BubbleNavigationLinearView bubbleNavigationLinearView = findViewById(R.id.bottom_navigation_view_linear);
+        final BubbleNavigationLinearView bubbleNavigationLinearView = findViewById(R.id.bottom_navigation_view_linear2);
         bubbleNavigationLinearView.setTypeface(null);
 
         //   bubbleNavigationLinearView.setBackgroundColor(R.color.colorPrimary);
@@ -64,7 +64,7 @@ public class MainDriverActivity extends AppCompatActivity {
         bubbleNavigationLinearView.setBadgeValue(2, null);
 
 
-        final ViewPager viewPager = findViewById(R.id.view_pager);
+        final ViewPager viewPager = findViewById(R.id.view_pager2);
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

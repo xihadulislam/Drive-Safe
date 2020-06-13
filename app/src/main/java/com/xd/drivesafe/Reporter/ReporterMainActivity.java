@@ -54,9 +54,9 @@ public class ReporterMainActivity extends AppCompatActivity  {
         SpaceNavigationView spaceNavigationView = findViewById(R.id.space);
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
         spaceNavigationView.addSpaceItem(new SpaceItem("HOME", R.drawable.ic_home));
-        spaceNavigationView.addSpaceItem(new SpaceItem("SEARCH", R.drawable.ic_notifications_black_24dp));
+        spaceNavigationView.addSpaceItem(new SpaceItem("REPORT", R.drawable.ic_report_black_24dp));
 
-        spaceNavigationView.showIconOnly();
+      //  spaceNavigationView.showIconOnly();
 
 
         setFragment(new RHomeFragment());

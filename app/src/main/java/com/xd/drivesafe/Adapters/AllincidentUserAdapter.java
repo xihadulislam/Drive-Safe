@@ -1,7 +1,10 @@
 package com.xd.drivesafe.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener;
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +28,10 @@ import com.squareup.picasso.Picasso;
 import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Models.CaseModel;
 import com.xd.drivesafe.Models.ReportModel;
+import com.xd.drivesafe.MyApp;
 import com.xd.drivesafe.R;
+import com.xd.drivesafe.Reporter.ReportActivity;
+import com.xd.drivesafe.Reporter.ReporterMainActivity;
 import com.xd.drivesafe.User.CommentActivity;
 import com.xd.drivesafe.User.DriverProfileUserActivity;
 
@@ -34,7 +42,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUserAdapter.MyViewHolder> {
 
-
+    boolean flg;
     private Context context;
     List<ReportModel> reportModelList;
 
@@ -75,7 +83,6 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
                         if (task.isSuccessful()){
 
                             caseModelList = new ArrayList<>();
-
                             String text = "";
 
                             for (DocumentSnapshot doc : task.getResult()){
@@ -95,14 +102,60 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
                 });
 
 
+
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("codesub", Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains("key")) {
+            flg = sharedPreferences.getBoolean("key", false);
+
+        }
+
+
+
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, DriverProfileUserActivity.class);
-                intent.putExtra("key",reportModel.getUserid());
-                context.startActivity(intent);
-                Animatoo.animateSlideUp(context);
+                if (MyApp.ck==22 && !flg){
+
+                    new TTFancyGifDialog.Builder((Activity) context)
+                            .setTitle("Subscription Notice")
+                            .setMessage("For visiting all divers profile you need to subscribe our system." +
+                                    "\n\n"+
+                                    "To subscribe this write “start drivesafe” and send to 21213 from any airtel or Robi operator"
+                                    + "\n\n"+
+                                    "you will get a code and submit this code here"
+
+                            )
+                            .setPositiveBtnText("Send SMS")
+                            .setPositiveBtnBackground("#22b573")
+                            .setNegativeBtnBackground("#22b573")
+                            .setGifResource(R.drawable.gif1)
+                            .isCancellable(true)
+                            .OnPositiveClicked(new TTFancyGifDialogListener() {
+                                @Override
+                                public void OnClick() {
+
+                                    Uri uri = Uri.parse("smsto:21213");
+                                    Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+                                    intent.putExtra("sms_body", "start drivesafe");
+                                    context.startActivity(intent);
+                                }
+                            })
+
+                            .build();
+                }
+                else {
+                    MyApp.ck+=1;
+                    Intent intent = new Intent(context, DriverProfileUserActivity.class);
+                    intent.putExtra("key",reportModel.getUserid());
+                    context.startActivity(intent);
+                    Animatoo.animateSlideUp(context);
+
+                }
+
+
             }
         });
 
@@ -113,10 +166,12 @@ public class AllincidentUserAdapter extends  RecyclerView.Adapter<AllincidentUse
 
                 Intent intent = new Intent(context, CommentActivity.class);
                 intent.putExtra("id", reportModel.getRepoid());
+                intent.putExtra("show", "yes");
                 context.startActivity(intent);
                 Animatoo.animateSlideUp(context);
             }
         });
+
 
 
         FirebaseFirestore.getInstance().collection("Report").document(reportModel.getRepoid())

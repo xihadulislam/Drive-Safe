@@ -135,12 +135,7 @@ public class NotificationSettingsActivity extends AppCompatActivity {
         readData();
 
 
-
-
-
-
     }
-
 
 
 
@@ -156,7 +151,6 @@ public class NotificationSettingsActivity extends AppCompatActivity {
     }
 
     private void readData() {
-
         SharedPreferences sharedPreferences = getSharedPreferences("settings", Context.MODE_PRIVATE);
         if (sharedPreferences.contains("sound") && sharedPreferences.contains("vibrate") && sharedPreferences.contains("mute")) {
 
@@ -166,7 +160,6 @@ public class NotificationSettingsActivity extends AppCompatActivity {
             sound.setChecked(swSound);
             vibrate.setChecked(swvibrate);
             mute.setChecked(swmute);
-
 
         }
 

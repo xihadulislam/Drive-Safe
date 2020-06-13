@@ -16,7 +16,9 @@ android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <EditText
+            android:inputType="number"
             android:id="@+id/etPhoneNum"
             android:background="@color/white"
             android:hint="TO"
@@ -25,6 +27,7 @@ android:layout_gravity="center"
             android:layout_height="wrap_content">
         </EditText>
         <EditText
+            android:inputType="text"
             android:id="@+id/etMsg"
             android:layout_marginTop="10dp"
             android:gravity="start"
@@ -48,7 +51,6 @@ android:layout_gravity="center"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
         </Button>
 
     </LinearLayout>

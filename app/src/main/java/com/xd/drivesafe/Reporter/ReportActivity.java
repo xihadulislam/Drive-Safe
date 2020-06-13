@@ -2,10 +2,18 @@ package com.xd.drivesafe.Reporter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +29,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
+import com.xd.drivesafe.Admin.SendSMSActivity;
 import com.xd.drivesafe.Driver.MainDriverActivity;
 import com.xd.drivesafe.Models.CaseModel;
 import com.xd.drivesafe.Models.NotificationModel;
@@ -36,7 +45,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ReportActivity extends AppCompatActivity implements View.OnClickListener {
 
-
+    private final static int REQUEST_CODE_PERMISSION_SEND_SMS = 123;
     private static final String TAG = "ReportPageActivity";
     private CheckBox ck1, ck2, ck3, ck4, ck5, ck6, ck7, ck8, ck9, ck10, ck11, ck12, ck13, ck14, ck15, ck16, ck17;
 
@@ -62,10 +71,24 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
     private ProgressDialog progressDialog;
 
+
+    UserModel userModel;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
+
+
+        if (checkPermission(Manifest.permission.SEND_SMS)) {
+
+        } else {
+            ActivityCompat.requestPermissions(ReportActivity.this, new String[]{
+                    (Manifest.permission.SEND_SMS)}, REQUEST_CODE_PERMISSION_SEND_SMS);
+        }
+
+
 
 
         bck1 = false;
@@ -134,7 +157,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         propic = findViewById(R.id.pendproPorpicID);
 
         Intent i = getIntent();
-        UserModel userModel = (UserModel) i.getSerializableExtra("obj");
+         userModel = (UserModel) i.getSerializableExtra("obj");
 
         Tname.setText(userModel.getName());
 
@@ -146,8 +169,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
 
         String ttt = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        Toast.makeText(this, ttt, Toast.LENGTH_SHORT).show();
 
 
         FirebaseFirestore.getInstance().collection("Reporterinfo")
@@ -175,12 +196,17 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                 des = editText.getText().toString().trim();
 
 
+                if (!isConnected()){
+                    Toast.makeText(ReportActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
                 if (des.isEmpty()) {
 
                     editText.setError("Description Required.");
                     return;
                 }
-
 
                 progressDialog.setMessage("Please Wait...!");
                 progressDialog.show();
@@ -280,7 +306,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                     CaseModel caseModel = new CaseModel("Driving Without Fitness", 25);
                     caseModelList.add(caseModel);
                     lostpoint += 25;
-
                 }
                 if (ck17.isChecked()) {
                     CaseModel caseModel = new CaseModel("Driving Without Route Permit", 50);
@@ -299,7 +324,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
                                 if (task.isSuccessful()) {
 
-
                                     FirebaseFirestore.getInstance().collection("Report").document(task.getResult().getId())
                                             .update("repoid", task.getResult().getId());
 
@@ -307,36 +331,60 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                                         CaseModel caseM = caseModelList.get(i);
                                         FirebaseFirestore.getInstance().collection("Report").document(task.getResult().getId())
                                                 .collection("case").add(caseM);
-
                                     }
-
                                     FirebaseFirestore.getInstance().collection("approved_Drivers").document(userModel.getUserId())
                                             .update("point", userModel.getPoint()-lostpoint);
 
 
-                                    NotificationModel notificationModel = new NotificationModel(reportModel.getReportername()+" is Reported you",System.currentTimeMillis());
+                                    NotificationModel notificationModel = new NotificationModel(reportModel.getReportername()+" is Reported against you",System.currentTimeMillis());
 
                                     FirebaseFirestore.getInstance().collection("Notifications").document(userModel.getUserId())
                                             .collection("msg").add(notificationModel);
 
-                                    NotificationModel notificationModel2 = new NotificationModel(reportModel.getReportername()+" is Reported " + userModel.getName(),System.currentTimeMillis());
+                                    NotificationModel notificationModel2 = new NotificationModel(reportModel.getReportername()+" is Reported against " + userModel.getName(),System.currentTimeMillis());
 
                                     FirebaseFirestore.getInstance().collection("Notificationsadmin").add(notificationModel2);
-                                    progressDialog.dismiss();
 
+                                    senddriver();
+                                    senddriverowner();
+
+                                    progressDialog.dismiss();
                                     startActivity(new Intent(ReportActivity.this, ReporterMainActivity.class));
                                     finish();
-
 
                                 }
 
                             }
                         });
-
             }
         });
 
     }
+
+    private boolean checkPermission(String permission) {
+        int checkPermission = ContextCompat.checkSelfPermission(this, permission);
+        return checkPermission == PackageManager.PERMISSION_GRANTED;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_PERMISSION_SEND_SMS:
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                }
+                break;
+        }
+
+
+    }
+
+
+
+
 
     @Override
     public void onClick(View v) {
@@ -565,4 +613,46 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+        }
+        return connected;
+    }
+
+
+
+    private  void  senddriver(){
+        String phone = userModel.getPhone();
+        String msg = "it’s informed that a case has been filed against you today";
+
+        SmsManager manager = SmsManager.getDefault();
+        StringBuilder sb = new StringBuilder(msg);
+        manager.sendTextMessage(phone, null, sb.toString(), null, null);
+
+
+    }
+
+
+    private  void  senddriverowner(){
+        String phone = userModel.getOwner_phone();
+        String msg = "Its informed that a case has been filed against your vehicle";
+
+        SmsManager manager = SmsManager.getDefault();
+        StringBuilder sb = new StringBuilder(msg);
+        manager.sendTextMessage(phone, null, sb.toString(), null, null);
+
+
+
+
+    }
+
+
 }

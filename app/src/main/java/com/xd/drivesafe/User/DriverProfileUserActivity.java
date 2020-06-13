@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -69,7 +72,7 @@ public class DriverProfileUserActivity extends AppCompatActivity {
 
     List<ReportModel> reportModelList;
 
-
+    boolean flg;
     ImageView coverpic;
     CircleImageView propic;
     TextView name,address,license,phone;
@@ -129,6 +132,18 @@ public class DriverProfileUserActivity extends AppCompatActivity {
         setRecyview();
 
         setRecyview2();
+
+
+        if (!isConnected()){
+
+            Toast.makeText(this, "You are in Offline", Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+
+
+
 
         FirebaseFirestore.getInstance().collection("NormalUserinfo")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -224,50 +239,61 @@ public class DriverProfileUserActivity extends AppCompatActivity {
         });
 
 
-
-        reviewsubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ProgressDialog pd = new ProgressDialog(DriverProfileUserActivity.this);
-
-                pd.show();
-
-                String review = Ereview.getText().toString().trim();
-                float rating = ratingBar.getRating();
-
-                ReviewModel reviewModel = new ReviewModel(normaluserModel.getUsername(),normaluserModel.getUserid(),review,userModel.getUserId(),
-                        rating,System.currentTimeMillis());
-
-                FirebaseFirestore.getInstance().collection("approved_Drivers").document(val)
-                        .collection("Reviews").add(reviewModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        if (task.isSuccessful()){
+            reviewsubmit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
 
-                            float bal = userModel.getAvgrating()+rating;
-
-                            FirebaseFirestore.getInstance().collection("approved_Drivers").document(val)
-                                    .update("avgrating",bal);
-
-
-                            pd.dismiss();
-                            Toast.makeText(DriverProfileUserActivity.this, "Submitted", Toast.LENGTH_SHORT).show();
-                         Intent intent1 =  new  Intent(DriverProfileUserActivity.this,DriverProfileUserActivity.class);
-                         intent.putExtra("key",userModel.getUserId());
-                            startActivity(intent);
-                            finish();
-                        }
-                        else
-                        {
-                            pd.dismiss();
-                        }
+                    if (!isConnected()){
+                        Toast.makeText(DriverProfileUserActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                });
 
-            }
-        });
+
+
+                    ProgressDialog pd = new ProgressDialog(DriverProfileUserActivity.this);
+
+                    pd.show();
+
+                    String review = Ereview.getText().toString().trim();
+                    float rating = ratingBar.getRating();
+
+                    ReviewModel reviewModel = new ReviewModel(normaluserModel.getUsername(),normaluserModel.getUserid(),review,userModel.getUserId(),
+                            rating,System.currentTimeMillis());
+
+                    FirebaseFirestore.getInstance().collection("approved_Drivers").document(val)
+                            .collection("Reviews").add(reviewModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                            if (task.isSuccessful()){
+
+
+                                float bal = userModel.getAvgrating()+rating;
+
+                                FirebaseFirestore.getInstance().collection("approved_Drivers").document(val)
+                                        .update("avgrating",bal);
+
+
+                                pd.dismiss();
+                                Toast.makeText(DriverProfileUserActivity.this, "Submitted", Toast.LENGTH_SHORT).show();
+                                Intent intent1 =  new  Intent(DriverProfileUserActivity.this,DriverProfileUserActivity.class);
+                                intent.putExtra("key",userModel.getUserId());
+                                startActivity(intent);
+                                finish();
+                            }
+                            else
+                            {
+                                pd.dismiss();
+                            }
+                        }
+                    });
+
+                }
+            });
+
+
+
+
 
 
         findViewById(R.id.morereview).setOnClickListener(new View.OnClickListener() {
@@ -285,7 +311,41 @@ public class DriverProfileUserActivity extends AppCompatActivity {
     }
 
 
+    private boolean checkreviewehaveornot() {
 
+         flg = false;
+        String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        FirebaseFirestore.getInstance().collection("approved_Drivers").document(val)
+                .collection("Reviews").whereEqualTo("userid",id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                if (task.getResult().size()>0){
+
+                    flg = true;
+                }
+                else {
+
+                }
+            }
+        });
+
+        return  flg;
+    }
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+        }
+        return connected;
+    }
 
     private void setRecyview2() {
 
@@ -330,12 +390,10 @@ public class DriverProfileUserActivity extends AppCompatActivity {
                     reviewModelList = new ArrayList<>();
 
                     for (DocumentSnapshot doc : task.getResult()){
-
                         ReviewModel reviewModel = doc.toObject(ReviewModel.class);
                         reviewModelList.add(reviewModel);
 
                     }
-
                     ReviewAdapter adapter = new ReviewAdapter(DriverProfileUserActivity.this,reviewModelList);
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setLayoutManager(new LinearLayoutManager(DriverProfileUserActivity.this));

@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -118,6 +121,17 @@ public class DriverprofileDActivity extends AppCompatActivity {
         setRecyview();
 
         setRecyview2();
+
+
+        if (!isConnected()){
+
+            Toast.makeText(this, "You are in Offline", Toast.LENGTH_SHORT).show();
+
+            return;
+        }
+
+
+
 
         FirebaseFirestore.getInstance().collection("NormalUserinfo")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -291,5 +305,21 @@ public class DriverprofileDActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+        }
+        return connected;
+    }
+
+
+
 
 }

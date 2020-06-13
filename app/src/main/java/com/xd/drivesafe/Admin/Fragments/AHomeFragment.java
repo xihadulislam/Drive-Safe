@@ -33,6 +33,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xd.drivesafe.Admin.CreateAdminActivity;
 import com.xd.drivesafe.Admin.CreateReporterActivity;
 import com.xd.drivesafe.Admin.DriverlistActivity;
+import com.xd.drivesafe.Admin.NidVerifiationActivity;
 import com.xd.drivesafe.Admin.ReporterandAdminListActivity;
 import com.xd.drivesafe.Admin.RequestDriverActivity;
 import com.xd.drivesafe.Admin.SendSMSActivity;
@@ -59,18 +60,19 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_ahome, container, false);
 
 
-        layout1 = view.findViewById(R.id.scannerlinID);
-         layout2 = view.findViewById(R.id.linnidverificationId);
-        layout3 = view.findViewById(R.id.smsalertlinID);
-        layout4 = view.findViewById(R.id.allincidentlinId);
-        layout5 = view.findViewById(R.id.repotrterslinID);
-        layout6 = view.findViewById(R.id.adminlistID);
-        layout7 = view.findViewById(R.id.bestdriverlinID);
-        layout8 = view.findViewById(R.id.createadminlinID);
-        layout9 = view.findViewById(R.id.alldriverlinID);
-        layout10 = view.findViewById(R.id.createreporterlinID);
-        layout11 = view.findViewById(R.id.pendingdriversID);
-        layout12 = view.findViewById(R.id.rejectdriverliID);
+        layout1 = view.findViewById(R.id.scannerlinID1);
+         layout2 = view.findViewById(R.id.linnidverificationId1);
+        layout3 = view.findViewById(R.id.smsalertlinID1);
+        layout4 = view.findViewById(R.id.allincidentlinId1);
+        layout5 = view.findViewById(R.id.repotrterslinID1);
+        layout6 = view.findViewById(R.id.adminlistID1);
+        layout7 = view.findViewById(R.id.bestdriverlinID1);
+        layout8 = view.findViewById(R.id.createadminlinID1);
+        layout9 = view.findViewById(R.id.alldriverlinID1);
+        layout10 = view.findViewById(R.id.createreporterlinID1);
+        layout11 = view.findViewById(R.id.pendingdriversID1);
+        layout12 = view.findViewById(R.id.rejectdriverliID1);
+
 
 
         layout1.setOnClickListener(AHomeFragment.this);
@@ -97,8 +99,6 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
         });
 
 
-
-
         return view;
 
     }
@@ -120,37 +120,45 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
                     });
 
       }
+        else if (v == layout2) {
+            startActivity(new Intent(getActivity(), NidVerifiationActivity.class));
+            Animatoo.animateZoom(getActivity());
 
+        }
 
         else if (v == layout3) {
 
             startActivity(new Intent(getActivity(), SendSMSActivity.class));
+            Animatoo.animateZoom(getActivity());
 
         } else if (v == layout4) {
 
             Intent intent = new Intent(getActivity(), AllincidentlistRActivity.class);
             intent.putExtra("key","all");
             startActivity(intent);
+            Animatoo.animateSwipeLeft(getActivity());
 
         } else if (v == layout5) {
             Intent intent = new Intent(getActivity(), ReporterandAdminListActivity.class);
             intent.putExtra("key","repo");
             startActivity(intent);
-
+            Animatoo.animateSplit(getActivity());
         } else if (v == layout6) {
 
             Intent intent = new Intent(getActivity(), ReporterandAdminListActivity.class);
             intent.putExtra("key","admin");
             startActivity(intent);
+            Animatoo.animateInAndOut(getActivity());
 
         } else if (v == layout7) {
             Intent intent = new Intent(getActivity(), DriverlistActivity.class);
             intent.putExtra("key","best");
             startActivity(intent);
 
+            Animatoo.animateZoom(getActivity());
         } else if (v == layout8) {
             startActivity(new Intent(getActivity(), CreateAdminActivity.class));
-
+            Animatoo.animateSlideUp(getActivity());
 
         } else if (v == layout9) {
 
@@ -158,20 +166,25 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
             intent.putExtra("key","all");
             startActivity(intent);
 
+            Animatoo.animateSwipeRight(getActivity());
+
         } else if (v == layout10) {
 
             startActivity(new Intent(getActivity(), CreateReporterActivity.class));
-
+            Animatoo.animateZoom(getActivity());
         } else if (v == layout11) {
 
             Intent intent = new Intent(getActivity(), RequestDriverActivity.class);
             intent.putExtra("key","app");
             startActivity(intent);
 
+            Animatoo.animateSlideUp(getActivity());
+
         } else if (v == layout12) {
             Intent intent = new Intent(getActivity(), RequestDriverActivity.class);
             intent.putExtra("key","reject");
             startActivity(intent);
+            Animatoo.animateSwipeLeft(getActivity());
 
         }
 
@@ -254,6 +267,5 @@ public class AHomeFragment extends Fragment implements View.OnClickListener {
 
         }
     }
-
 
 }

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,9 +51,9 @@ public class AProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_aprofile, container, false);
 
 
-        name =view. findViewById(R.id.user_profile_name);
-        email = view.findViewById(R.id.user_profile_short_bio);
-        signout = view.findViewById(R.id.signoutTextID);
+        name =view. findViewById(R.id.user_profile_name1);
+        email = view.findViewById(R.id.user_profile_short_bio1);
+        signout = view.findViewById(R.id.signoutTextID1);
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseFirestore.getInstance().collection("admininfo").document(id)
@@ -83,7 +84,7 @@ public class AProfileFragment extends Fragment {
                 startActivity(new Intent(getActivity(), FirstActivity.class));
                 getActivity().finish();
 
-
+                Animatoo.animateZoom(getActivity());
             }
         });
 

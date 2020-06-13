@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,6 +39,9 @@ public class AllincidentlistRActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_allincidentlist_r);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setTitle("All incidents");
 
         recyclerView = findViewById(R.id.allincidentID);
         progressDialog = new ProgressDialog(this);
@@ -109,8 +114,7 @@ public class AllincidentlistRActivity extends AppCompatActivity {
 
                         ReportModel reportModel = doc.toObject(ReportModel.class);
                         reportModelList.add(reportModel);
-                        reportModelList.add(reportModel);
-                        reportModelList.add(reportModel);
+
 
                     }
 
@@ -156,8 +160,7 @@ public class AllincidentlistRActivity extends AppCompatActivity {
 
                         ReportModel reportModel = doc.toObject(ReportModel.class);
                         reportModelList.add(reportModel);
-                        reportModelList.add(reportModel);
-                        reportModelList.add(reportModel);
+
 
                     }
 
@@ -177,5 +180,23 @@ public class AllincidentlistRActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        Animatoo.animateSwipeLeft(AllincidentlistRActivity.this);
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateSwipeLeft(AllincidentlistRActivity.this);
     }
 }

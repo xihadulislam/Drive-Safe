@@ -72,7 +72,7 @@
                                     android:drawablePadding="5dp"
                                     android:fontFamily="@font/roboto_medium"
                                     android:padding="5dp"
-                                    android:text="Xihad"
+                                    android:text="Name"
                                     android:textColor="@color/colorAccent"
                                     android:textSize="20sp" />
 
@@ -83,7 +83,7 @@
                                     android:drawableLeft="@drawable/ic_location_on_black_24dp"
                                     android:drawablePadding="2dp"
                                     android:fontFamily="@font/roboto"
-                                    android:text="sylhet bangladesh"
+                                    android:text="Address"
                                     android:textSize="14sp" />
 
                                 <TextView
@@ -92,7 +92,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawablePadding="2dp"
                                     android:fontFamily="@font/roboto"
-                                    android:text="sylhet bangladesh"
+                                    android:text=""
                                     android:textSize="14sp" />
 
                                 <TextView
@@ -101,7 +101,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawablePadding="2dp"
                                     android:fontFamily="@font/roboto"
-                                    android:text="sylhet bangladesh"
+                                    android:text=""
                                     android:textSize="14sp" />
 
 
@@ -147,7 +147,7 @@
                                         android:paddingTop="5dp"
                                         android:paddingRight="40dp"
                                         android:paddingBottom="5dp"
-                                        android:text="500"
+                                        android:text="N/A"
                                         android:textColor="@color/white"
                                         android:textSize="22sp" />
 
@@ -184,7 +184,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center"
                                         android:fontFamily="@font/roboto_medium"
-                                        android:text="4.5"
+                                        android:text="N/A"
                                         android:textColor="@color/black"
                                         android:textSize="22sp" />
                                 </LinearLayout>
@@ -220,7 +220,7 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="80"
+
                                             app:backgroundColor="@color/green_bg_light"
                                             app:progressColor="@color/green_active" />
 
@@ -229,7 +229,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
-                                            android:text="555"
+                                            android:text=""
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>
@@ -260,7 +260,7 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="60"
+
                                             app:backgroundColor="@color/blue_bg_light"
                                             app:progressColor="@color/blue_active" />
 
@@ -270,7 +270,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:layout_centerVertical="true"
-                                            android:text="236"
+                                            android:text=""
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>
@@ -301,7 +301,7 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="50"
+
                                             app:backgroundColor="@color/orange_bg_light"
                                             app:progressColor="@color/orange_active" />
 
@@ -311,7 +311,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:layout_centerVertical="true"
-                                            android:text="73"
+                                            android:text=""
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>
@@ -342,7 +342,7 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="20"
+
                                             app:backgroundColor="@color/purple_bg_light"
                                             app:progressColor="@color/purple_active" />
 
@@ -352,7 +352,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:layout_centerVertical="true"
-                                            android:text="54"
+                                            android:text=""
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>
@@ -383,7 +383,7 @@
                                             android:indeterminate="false"
                                             android:maxHeight="12dp"
                                             android:minHeight="12dp"
-                                            android:progress="10"
+
                                             app:backgroundColor="@color/red_bg_light"
                                             app:progressColor="@color/red_active" />
 
@@ -393,7 +393,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentEnd="true"
                                             android:layout_centerVertical="true"
-                                            android:text="5"
+                                            android:text=""
                                             android:textSize="20sp" />
 
                                     </RelativeLayout>

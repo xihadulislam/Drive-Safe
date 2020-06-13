@@ -82,6 +82,8 @@
                         />
 
                     <TextView
+                        android:id="@+id/forgetpssId"
+                        android:padding="5dp"
                         android:layout_marginLeft="25dp"
                         android:layout_gravity="left"
                         android:textStyle="bold"

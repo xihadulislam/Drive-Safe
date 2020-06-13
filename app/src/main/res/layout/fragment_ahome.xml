@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/green_bg_light"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Admin.Fragments.AHomeFragment">
 
@@ -25,12 +25,11 @@
 
             </LinearLayout>
 
-
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardddddddddddddddd2"
                 app:cardCornerRadius="5dp"
                 android:elevation="8dp"
-                android:layout_marginTop="110dp"
+                android:layout_marginTop="90dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_below="@+id/cardddddddddddddddd1"
@@ -53,7 +52,7 @@
 
 
                         <LinearLayout
-                            android:id="@+id/scannerlinID"
+                            android:id="@+id/scannerlinID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -81,7 +80,7 @@
 
 
                         <LinearLayout
-                            android:id="@+id/linnidverificationId"
+                            android:id="@+id/linnidverificationId1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -106,7 +105,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/smsalertlinID"
+                            android:id="@+id/smsalertlinID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -129,7 +128,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/allincidentlinId"
+                            android:id="@+id/allincidentlinId1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -168,7 +167,7 @@
 
 
                         <LinearLayout
-                            android:id="@+id/repotrterslinID"
+                            android:id="@+id/repotrterslinID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -195,7 +194,7 @@
 
 
                         <LinearLayout
-                            android:id="@+id/adminlistID"
+                            android:id="@+id/adminlistID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -221,7 +220,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/bestdriverlinID"
+                            android:id="@+id/bestdriverlinID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -246,7 +245,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/createadminlinID"
+                            android:id="@+id/createadminlinID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -288,7 +287,7 @@
 
 
                         <LinearLayout
-                            android:id="@+id/alldriverlinID"
+                            android:id="@+id/alldriverlinID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -313,7 +312,7 @@
 
 
                         <LinearLayout
-                            android:id="@+id/createreporterlinID"
+                            android:id="@+id/createreporterlinID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -338,7 +337,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/pendingdriversID"
+                            android:id="@+id/pendingdriversID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -361,7 +360,7 @@
 
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/rejectdriverliID"
+                            android:id="@+id/rejectdriverliID1"
                             android:gravity="center"
                             android:orientation="vertical"
                             android:layout_weight="1"
@@ -484,7 +483,6 @@
 
                     </LinearLayout>
                     <LinearLayout
-
                         android:gravity="center"
                         android:orientation="vertical"
                         android:layout_weight="1"

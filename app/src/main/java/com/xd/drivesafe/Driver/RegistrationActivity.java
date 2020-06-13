@@ -9,9 +9,12 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.service.autofill.RegexValidator;
@@ -169,6 +172,12 @@ public class RegistrationActivity extends AppCompatActivity {
 
                  radioButton =  findViewById(selectedId);
                 gender = radioButton.getText().toString();
+
+
+                if (!isConnected()){
+                    Toast.makeText(RegistrationActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
 
 
@@ -434,6 +443,23 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onBackPressed();
         Animatoo.animateSwipeRight(this); //fire the slide left animation
     }
+
+
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+        }
+        return connected;
+    }
+
+
 
 
 }

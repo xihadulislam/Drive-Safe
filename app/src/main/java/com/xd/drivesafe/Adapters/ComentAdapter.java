@@ -1,6 +1,7 @@
 package com.xd.drivesafe.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class ComentAdapter extends RecyclerView.Adapter<ComentAdapter.MyViewHold
         final CommentModel commentModel = commentModelList.get(position);
 
 
+        Log.d(TAG, "onBindViewHolder: " + commentModel.getUsername());
 
         holder.createat.setText(TimeAgo.from(commentModel.getCreateAt()));
 

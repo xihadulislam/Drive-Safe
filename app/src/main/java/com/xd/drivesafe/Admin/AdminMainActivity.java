@@ -26,7 +26,6 @@ public class AdminMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_main);
 
 
-
         ArrayList<Fragment> fragList = new ArrayList<>();
         fragList.add(new AHomeFragment());
         fragList.add(new ASearchFragment());
@@ -35,17 +34,17 @@ public class AdminMainActivity extends AppCompatActivity {
 
         ScreenSlidePageFragment pagerAdapter = new ScreenSlidePageFragment(fragList, getSupportFragmentManager());
 
-        final BubbleNavigationLinearView bubbleNavigationLinearView = findViewById(R.id.bottom_navigation_view);
+        final BubbleNavigationLinearView bubbleNavigationLinearView = findViewById(R.id.bottom_navigation_view1);
         bubbleNavigationLinearView.setTypeface(null);
 
         //   bubbleNavigationLinearView.setBackgroundColor(R.color.colorPrimary);
 
-        bubbleNavigationLinearView.setBadgeValue(0, "40");
+        bubbleNavigationLinearView.setBadgeValue(0, null);
         bubbleNavigationLinearView.setBadgeValue(1, null); //invisible badge
-        bubbleNavigationLinearView.setBadgeValue(2, "7");
+        bubbleNavigationLinearView.setBadgeValue(2, null);
 
 
-        final ViewPager viewPager = findViewById(R.id.view_pager);
+        final ViewPager viewPager = findViewById(R.id.view_pager1);
         viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

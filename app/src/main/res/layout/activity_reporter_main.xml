@@ -22,13 +22,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        app:active_item_color="@color/colorPrimary"
+        app:active_item_color="@color/white"
         app:centre_button_color="@color/orange_bg_light"
-        app:inactive_item_color="@color/white"
+        app:inactive_item_color="@color/grey_active"
         app:space_background_color="@color/orange_active"
         app:centre_button_icon="@drawable/qrcode"
         app:space_item_icon_size="35dp"
         app:space_item_icon_only_size="35dp" />
 
 </RelativeLayout>
+
 

@@ -91,9 +91,6 @@ public class DProfileFragment extends Fragment {
     ProgressBar progressBar1,progressBar2,progressBar3,progressBar4,progressBar5;
 
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -127,8 +124,6 @@ public class DProfileFragment extends Fragment {
 
 
         setRecyview();
-
-
 
 
 

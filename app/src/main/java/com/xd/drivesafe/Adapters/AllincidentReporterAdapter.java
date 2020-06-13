@@ -25,6 +25,7 @@ import com.xd.drivesafe.Driver.DriverprofileDActivity;
 import com.xd.drivesafe.Models.CaseModel;
 import com.xd.drivesafe.Models.ReportModel;
 import com.xd.drivesafe.R;
+import com.xd.drivesafe.User.CommentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,21 @@ public class AllincidentReporterAdapter extends  RecyclerView.Adapter<Allinciden
                 Animatoo.animateInAndOut(context);
             }
         });
+
+
+        holder.comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, CommentActivity.class);
+                intent.putExtra("id", reportModel.getRepoid());
+                intent.putExtra("show", "no");
+                context.startActivity(intent);
+                Animatoo.animateSlideUp(context);
+            }
+        });
+
+
 
 
         FirebaseFirestore.getInstance().collection("Report").document(reportModel.getRepoid())

@@ -14,10 +14,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,7 +56,6 @@ public class ApprovepageActivity extends AppCompatActivity {
 
     private  TextView reject,approve;
 
-
     UserModel userModel ;
 
 
@@ -71,22 +73,27 @@ public class ApprovepageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_approvepage);
 
-        Ename = findViewById(R.id.pendpronameID);
-        Enid = findViewById(R.id.pendnidId);
-        Elicense = findViewById(R.id.pendlicenseID);
-        Eaddress = findViewById(R.id.penproaddressId);
-        Ephone = findViewById(R.id.pendphoneId);
-        Eownername = findViewById(R.id.pendeownernameID);
-        Eowneradress = findViewById(R.id.pendowneraddressID);
-        Eownerphone = findViewById(R.id.pendownerphone);
-        Enumberplate = findViewById(R.id.pendnumberplateId);
-        Eemail = findViewById(R.id.pendemailID);
-        Epoint = findViewById(R.id.pendpropointId);
-        photo = findViewById(R.id.pendproPorpicID);
-        coverpic = findViewById(R.id.pendcoverpicId);
-        Ebirthdate = findViewById(R.id.pendbirthdayId);
-        approve = findViewById(R.id.pendaproveeId);
-        reject = findViewById(R.id.pendrejectid);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+
+        Ename = findViewById(R.id.pendpronameID1);
+        Enid = findViewById(R.id.pendnidId1);
+        Elicense = findViewById(R.id.pendlicenseID1);
+        Eaddress = findViewById(R.id.penproaddressId1);
+        Ephone = findViewById(R.id.pendphoneId1);
+        Eownername = findViewById(R.id.pendeownernameID1);
+        Eowneradress = findViewById(R.id.pendowneraddressID1);
+        Eownerphone = findViewById(R.id.pendownerphone1);
+        Enumberplate = findViewById(R.id.pendnumberplateId1);
+        Eemail = findViewById(R.id.pendemailID1);
+        Epoint = findViewById(R.id.pendpropointId1);
+        photo = findViewById(R.id.pendproPorpicID1);
+        coverpic = findViewById(R.id.pendcoverpicId1);
+        Ebirthdate = findViewById(R.id.pendbirthdayId1);
+        approve = findViewById(R.id.pendaproveeId1);
+        reject = findViewById(R.id.pendrejectid1);
 
         progressDialog2 = new ProgressDialog(this);
 
@@ -122,6 +129,13 @@ public class ApprovepageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+                if (!isConnected()){
+                    Toast.makeText(ApprovepageActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
                 new TTFancyGifDialog.Builder((Activity) ApprovepageActivity.this)
                         .setTitle("Warning !")
                         .setMessage("Are you Sure to Rejected?")
@@ -150,7 +164,7 @@ public class ApprovepageActivity extends AppCompatActivity {
 
                                                         progressDialog.dismiss();
                                                         Toast.makeText(ApprovepageActivity.this, "success", Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(ApprovepageActivity.this, RequestDriverActivity.class));
+                                                        startActivity(new Intent(ApprovepageActivity.this, AdminMainActivity.class));
                                                         Animatoo.animateSlideLeft(ApprovepageActivity.this);
                                                         finish();
 
@@ -189,6 +203,12 @@ public class ApprovepageActivity extends AppCompatActivity {
         approve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!isConnected()){
+                    Toast.makeText(ApprovepageActivity.this, "You are in offline", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 
 
                 new TTFancyGifDialog.Builder((Activity) ApprovepageActivity.this)
@@ -274,6 +294,7 @@ public class ApprovepageActivity extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
 
 
+
                         UserModel usermodel2 = new UserModel(userModel.getName(), userModel.getNid(), userModel.getLicense(),
                                 userModel.getAddress(),  userModel.getPhone(),
                                 userModel.getOwner_name(),  userModel.getOwner_address(),  userModel.getOwner_phone(),
@@ -291,7 +312,7 @@ public class ApprovepageActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 progressDialog2.dismiss();
                                                 Toast.makeText(ApprovepageActivity.this, "success", Toast.LENGTH_SHORT).show();
-                                                startActivity(new Intent(ApprovepageActivity.this, RequestDriverActivity.class));
+                                                startActivity(new Intent(ApprovepageActivity.this, AdminMainActivity.class));
                                                 finish();
                                                 Animatoo.animateSlideLeft(ApprovepageActivity.this);
                                             }
@@ -401,6 +422,34 @@ public class ApprovepageActivity extends AppCompatActivity {
         }
 
     }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            connected = nInfo != null && nInfo.isAvailable() && nInfo.isConnected();
+            return connected;
+        } catch (Exception e) {
+        }
+        return connected;
+    }
+
+
+
+
 
 
 }

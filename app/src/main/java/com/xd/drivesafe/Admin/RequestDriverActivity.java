@@ -7,8 +7,10 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.blogspot.atifsoftwares.animatoolib.Animatoo;
@@ -36,7 +38,7 @@ public class RequestDriverActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
 
-
+    ImageView imageView ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +46,17 @@ public class RequestDriverActivity extends AppCompatActivity {
         setContentView(R.layout.activity_request_driver);
 
 
-        listView = findViewById(R.id.pendingdriverslistviewId);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+
+        listView = findViewById(R.id.pendingdriverslistviewId1);
         progressDialog = new ProgressDialog(this);
 
+        imageView = findViewById(R.id.noitemID111);
+
+        imageView.setVisibility(View.GONE);
 
         Intent intent = getIntent();
 
@@ -86,6 +96,11 @@ public class RequestDriverActivity extends AppCompatActivity {
 
                 }
                 progressDialog.dismiss();
+
+                if (list.size()==0){
+                    imageView.setVisibility(View.VISIBLE);
+                }
+
 
                 PendingDriversAdapter adapter = new PendingDriversAdapter(RequestDriverActivity.this,list);
 
@@ -137,6 +152,9 @@ public class RequestDriverActivity extends AppCompatActivity {
 
                 }
                 progressDialog.dismiss();
+                if (list.size()==0){
+                    imageView.setVisibility(View.VISIBLE);
+                }
 
                 PendingDriversAdapter adapter = new PendingDriversAdapter(RequestDriverActivity.this,list);
 
@@ -157,7 +175,6 @@ public class RequestDriverActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
 
 
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -170,4 +187,20 @@ public class RequestDriverActivity extends AppCompatActivity {
     }
 
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        Animatoo.animateSwipeLeft(RequestDriverActivity.this);
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Animatoo.animateSwipeLeft(RequestDriverActivity.this);
+    }
 }

@@ -140,7 +140,6 @@ public class UDriverListFragment extends Fragment {
     }
 
 
-
     private void loadRecylerview() {
 
         ProgressDialog pd = new ProgressDialog(getActivity());
@@ -159,7 +158,7 @@ public class UDriverListFragment extends Fragment {
 
                                 UserModel userModel = doc.toObject(UserModel.class);
                                 userModelList.add(userModel);
-                                userModelList.add(userModel);
+
 
                             }
                             pd.dismiss();

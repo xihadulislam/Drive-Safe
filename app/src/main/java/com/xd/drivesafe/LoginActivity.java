@@ -1,6 +1,7 @@
 package com.xd.drivesafe;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
@@ -20,8 +21,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.xd.drivesafe.Admin.AdminMainActivity;
 import com.xd.drivesafe.Driver.MainDriverActivity;
@@ -128,11 +131,30 @@ public class LoginActivity extends AppCompatActivity {
                                                     Animatoo.animateZoom(LoginActivity.this);
                                                     finish();
                                                 } if (name.equals("driver")){
-                                                    progressDialog.dismiss();
-                                                    storedata(name);
-                                                    startActivity(new Intent(LoginActivity.this, MainDriverActivity.class));
-                                                    Animatoo.animateZoom(LoginActivity.this);
-                                                    finish();
+
+                                                    FirebaseFirestore.getInstance().collection("approved_Drivers").document(user)
+                                                            .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                                                                @Override
+                                                                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+
+                                                                    if (documentSnapshot.exists()){
+
+                                                                        progressDialog.dismiss();
+                                                                        storedata(name);
+                                                                        startActivity(new Intent(LoginActivity.this, MainDriverActivity.class));
+                                                                        Animatoo.animateZoom(LoginActivity.this);
+                                                                        finish();
+                                                                    }
+                                                                    else {
+                                                                        FirebaseAuth.getInstance().signOut();
+                                                                        progressDialog.dismiss();
+                                                                        Toast.makeText(LoginActivity.this, "Wait for Admin approval", Toast.LENGTH_SHORT).show();
+
+                                                                    }
+                                                                }
+                                                            });
+
+
                                                 }
                                             }
                                         });
@@ -153,7 +175,20 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+
+        findViewById(R.id.forgetpssId).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(LoginActivity.this,ForgetPassActivity.class));
+
+            }
+        });
+
+
+
     }
+
 
     private void storedata(String name) {
         SharedPreferences sharedPreferences = getSharedPreferences("identy", Context.MODE_PRIVATE);

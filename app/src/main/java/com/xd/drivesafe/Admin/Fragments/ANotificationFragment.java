@@ -51,9 +51,8 @@ public class ANotificationFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_anotification, container, false);
 
 
-        recyclerView   = view.findViewById(R.id.notificationrecy);
+        recyclerView   = view.findViewById(R.id.notificationrecy1);
 
-        
 
         FirebaseFirestore.getInstance().collection("Notificationsadmin").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -68,12 +67,12 @@ public class ANotificationFragment extends Fragment {
 
                                 NotificationModel notificationModel = doc.toObject(NotificationModel.class);
                                 notificationModelList.add(notificationModel);
-                                notificationModelList.add(notificationModel);
-                                notificationModelList.add(notificationModel);
-                                notificationModelList.add(notificationModel);
-
                             }
 
+                            if (notificationModelList.size()==0){
+
+                                view.findViewById(R.id.nonotificA).setVisibility(View.VISIBLE);
+                            }
 
                             NotificationAdapter adapter = new NotificationAdapter(getActivity(),notificationModelList);
                             recyclerView.setHasFixedSize(true);
@@ -84,8 +83,6 @@ public class ANotificationFragment extends Fragment {
 
                     }
                 });
-
-
 
 
         return view;

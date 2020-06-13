@@ -49,7 +49,7 @@ public class DNotificationFragment extends Fragment {
 
 
 
-        recyclerView   = view.findViewById(R.id.notificationrecy);
+        recyclerView   = view.findViewById(R.id.notificationrecy3);
 
 
         String id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -69,12 +69,14 @@ public class DNotificationFragment extends Fragment {
 
                                 NotificationModel notificationModel = doc.toObject(NotificationModel.class);
                                 notificationModelList.add(notificationModel);
-                                notificationModelList.add(notificationModel);
-                                notificationModelList.add(notificationModel);
-                                notificationModelList.add(notificationModel);
+
 
                             }
 
+                            if (notificationModelList.size()==0){
+
+                                view.findViewById(R.id.nonotificD).setVisibility(View.VISIBLE);
+                            }
 
                             NotificationAdapter adapter = new NotificationAdapter(getActivity(),notificationModelList);
                             recyclerView.setHasFixedSize(true);
